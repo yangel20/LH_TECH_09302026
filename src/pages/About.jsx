@@ -15,9 +15,9 @@ export default function About() {
           <h2>{founders.title}</h2>
           <ul className="about__founders">
             {founders.people.map((p) => (
-              <li key={p.name}>
+              <li key={p.name} className="about__founder">
                 <Avatar name={p.name} src={p.photo} size={96} />
-                <p><strong>{p.name}</strong><br />{p.title}</p>
+                <p className="about__founder-text"><strong>{p.name}</strong><br />{p.title}</p>
               </li>
             ))}
           </ul>

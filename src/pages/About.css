@@ -1,2 +1,17 @@
 /* Owner: Codex (task #6) */
-.about__founders { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-4); }
+.about__founders {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+}
+.about__founder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 250px;
+}
+.about__founder-text { margin: var(--space-2) 0 0; }
