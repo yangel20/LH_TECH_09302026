@@ -1,0 +1,10 @@
+.analyze__lead { margin: 0 0 var(--space-4); font-weight: 600; }
+.analyze__table-wrap { overflow-x: auto; border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+.analyze__table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+.analyze__table caption { text-align: left; padding: var(--space-3); font-weight: 600; color: var(--color-text-muted); }
+.analyze__table th, .analyze__table td { text-align: left; padding: var(--space-2) var(--space-3); border-top: 1px solid var(--color-border); white-space: nowrap; }
+.analyze__table thead th { background: var(--color-primary-soft); color: var(--color-primary); }
+.analyze__risks-title { margin-top: var(--space-4); font-size: var(--text-md); }
+.analyze__risks { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
+.analyze__risk { padding: var(--space-2) var(--space-3); border-left: 4px solid var(--color-danger); background: var(--color-danger-soft); border-radius: var(--radius-sm); }
+@media (min-width: 640px) { .analyze__risks { grid-template-columns: 1fr 1fr; } }

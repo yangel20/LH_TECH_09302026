@@ -147,9 +147,72 @@ Button: "Contact us" → mailto:[TODO: team email]
 Nexo · Connecting brands to better answers. · Built by Team LH
 
 ---------------------------------------------------------------------------------------------
-# DEMO PAGE (built later): example it uses
-- Customer asks an AI assistant: "Best gaming laptop under $1,500 with at least 6 hours of battery life?"
-- The client's laptop qualifies but is **not mentioned**.
-- Cause: the product page lists battery as **watt-hours** with no estimated runtime.
-- Fix: add verified battery life in hours to the product page and feeds.
-- Re-test: the laptop now appears in the AI recommendation.
+# DEMO PAGE (/demo)
+Added 2026-09-30 by Claude with Yangel's approval (replaces the earlier gaming-laptop example).
+IMPORTANT: everything on this page is simulated. Always show the "Simulated" label and this line:
+"Niek is a fictional brand created for this demo. AI answers are simulated."
+Brands, websites and AI assistants are fictional (no real brands, no real AI products).
+Every step has a "Next" button; steps 2-7 also have "Back".
+Small UI labels (Back, Remove, Before/After, table headers) and the simulated AI answers,
+competitor products and prices live in src/lib/demoData.js (all fictional).
+
+## Intro
+Title: "See a Nexo audit in action"
+Text: "Follow a simulated audit for Niek, a fictional running brand, from first question to verified fix."
+
+## Step 1: Start (form, pre-filled)
+Title: "Tell us about the brand"
+- Company name: Niek
+- Website: https://niek.example
+- Location: Portland, OR
+- Industry: Running shoes & apparel
+  (other options: Consumer electronics, Retail & e-commerce, Food & beverage, Home & garden,
+  Health & beauty, Local services, Other)
+- Product data (CSV): niek-products.csv (pre-attached sample; "Replace file" to choose another)
+  Helper: "Your file stays in your browser. Nothing is uploaded."
+  Link: "Download the sample CSV"
+Button: "Next: Competitors"
+
+## Step 2: Competitors
+Title: "Who do you compete with?"
+Text: "We'll check how often AI recommends these brands instead of you. Remove or add competitors."
+Pre-filled: Altus Running (altus.example), Kova Athletics (kova.example), Ridgeline Gear (ridgeline.example)
+Suggestions: Summit Stride (summitstride.example), Cadence Co. (cadence.example),
+             Northpace (northpace.example), Tempo Trail (tempotrail.example), Brisk Athletic (brisk.example)
+Add box label: "Competitor name" · optional "Website" · Button: "Add"
+Rules: at least 1, up to 8 competitors.
+Button: "Next: Run AI check"
+
+## Step 3: Monitor
+Title: "What AI recommends today"
+Shopper question: "What are the best waterproof running shoes under $150?"
+Asked to 3 AI assistants (shown as Assistant A, B, C).
+Result: Niek is recommended in 0 of 3 answers. Competitors are recommended instead.
+Button: "Next: Analyze answers"
+
+## Step 4: Analyze
+Title: "What AI got wrong"
+Niek Stormline Trail ($135) meets the question: waterproof, under $150.
+Assistant B also claims it "is not waterproof": inaccurate.
+Risks found: Lost visibility (not mentioned) and Brand damage (wrong claim).
+Button: "Next: Find the cause"
+
+## Step 5: Investigate
+Title: "Why it happened"
+Root cause: the product page and feed say "sealed weather membrane" but never use the word
+"waterproof", and the feed's waterproof field is empty.
+Button: "Next: See the fix"
+
+## Step 6: Optimize
+Title: "Recommended fix"
+Recommended changes:
+- Product page: add "Waterproof" to the title and first line of the description.
+- Product feed: set waterproof = yes.
+"Every change is approved by the client before it goes live."
+Button: "Approve fix" (required), then "Next: Re-test"
+
+## Step 7: Re-test
+Title: "After the fix"
+Same question, 3 assistants: Niek Stormline Trail is now recommended in 3 of 3 answers,
+described as waterproof.
+Button: "Start over"

@@ -154,12 +154,3 @@ export const cta = {
   button: 'Contact us',
   email: 'contact@nexo.example',
 };
-
-// Demo page (built later). Fictional example only; the demo must be labeled "Simulated".
-export const demoExample = {
-  question: 'Best gaming laptop under $1,500 with at least 6 hours of battery life?',
-  outcome: 'The client\'s laptop qualifies but is not mentioned.',
-  cause: 'The product page lists battery as watt-hours with no estimated runtime.',
-  fix: 'Add verified battery life in hours to the product page and feeds.',
-  retest: 'The laptop now appears in the AI recommendation.',
-};
