@@ -1,1 +1,6 @@
-/* Owner: Codex (task #3) */
+ .cta { padding-top: 0; }
+.cta__panel { background: var(--color-primary-soft); border-color: var(--color-primary-soft); border-radius: var(--radius-lg); padding: var(--space-5) var(--space-4); display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); box-shadow: none; }
+.cta__title { font-size: var(--text-2xl); letter-spacing: -0.035em; color: var(--color-primary); max-width: 22ch; }
+.cta__text { color: var(--color-text-muted); margin: 0; font-size: var(--text-lg); }
+.cta__button { flex-shrink: 0; padding-block: var(--space-3); }
+@media (min-width: 800px) { .cta__panel { flex-direction: row; align-items: center; justify-content: space-between; padding: var(--space-6) var(--space-5); gap: var(--space-5); } }

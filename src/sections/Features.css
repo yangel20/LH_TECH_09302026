@@ -1,2 +1,12 @@
-/* Owner: Codex (task #3) */
-.features__grid { list-style: none; padding: 0; display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+#how-it-works { scroll-margin-top: var(--space-6); }
+.features__title { font-size: var(--text-2xl); letter-spacing: -0.035em; margin-bottom: var(--space-5); }
+.features__grid { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-3); }
+.features__step { border-top: 3px solid var(--color-accent); }
+.features__number { margin-bottom: var(--space-4); font-variant-numeric: tabular-nums; }
+.features__step h3 { font-size: var(--text-lg); }
+.features__step p { margin: 0; color: var(--color-text-muted); }
+.features__difference { margin-top: var(--space-5); padding: var(--space-4); background: var(--color-primary-soft); border-radius: var(--radius-md); display: grid; gap: var(--space-3); }
+.features__difference h3 { color: var(--color-primary); font-size: var(--text-xl); margin: 0; }
+.features__difference p { margin: 0; }
+@media (min-width: 600px) { .features__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .features__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } .features__difference { grid-template-columns: 1fr 2fr; padding: var(--space-5); gap: var(--space-5); } }

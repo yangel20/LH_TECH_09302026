@@ -2,23 +2,37 @@ import { Link } from 'react-router-dom';
 import { company, heroButtons, problem } from '../lib/company.js';
 import './Hero.css';
 
-// PLACEHOLDER. Owner: Codex (task #3). Replace freely; keep using the data from src/lib/company.js.
 export default function Hero() {
   return (
-    <section className="hero section">
+    <section className="hero section" aria-labelledby="hero-title">
       <div className="container">
-        <h1>{company.slogan}</h1>
-        <p>{company.description}</p>
-        <p className="hero__actions">
-          <a className="btn" href={heroButtons.primary.href}>{heroButtons.primary.label}</a>
-          <Link className="btn btn--ghost" to={heroButtons.secondary.to}>{heroButtons.secondary.label}</Link>
-        </p>
-        <h2>{problem.title}</h2>
-        {problem.text.map((t) => <p key={t}>{t}</p>)}
-        <p>{problem.risksIntro}</p>
-        <ul>
-          {problem.risks.map((r) => <li key={r.title}><strong>{r.title}</strong>: {r.text}</li>)}
-        </ul>
+        <div className="hero__intro">
+          <p className="badge badge--accent hero__brand">{company.name}</p>
+          <h1 id="hero-title" className="hero__title">{company.slogan}</h1>
+          <p className="hero__description">{company.description}</p>
+          <div className="hero__actions">
+            <Link className="btn" to={heroButtons.primary.href} onClick={() => document.getElementById('how-it-works')?.scrollIntoView()}>{heroButtons.primary.label}<span aria-hidden="true"> ↗</span></Link>
+            <Link className="btn btn--ghost" to={heroButtons.secondary.to}>{heroButtons.secondary.label}</Link>
+          </div>
+        </div>
+        <div className="hero__problem">
+          <div className="hero__context">
+            <h2>{problem.title}</h2>
+            {problem.text.map((text) => <p key={text}>{text}</p>)}
+          </div>
+          <div className="hero__risks">
+            <p className="hero__risks-label">{problem.risksIntro}</p>
+            <ul className="hero__risk-list">
+              {problem.risks.map((risk) => (
+                <li className="hero__risk card" key={risk.title}>
+                  <span className="hero__risk-marker" aria-hidden="true" />
+                  <h3>{risk.title}</h3>
+                  <p>{risk.text}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   );
