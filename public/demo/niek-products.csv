@@ -1,9 +1,9 @@
-sku,name,category,price_usd,waterproof,description
-NK-101,Niek Stormline Trail,Trail running shoe,135,,"Trail runner with a sealed weather membrane and grippy lugs for wet, muddy terrain."
-NK-102,Niek Pacer Road 2,Road running shoe,110,no,"Lightweight daily trainer with a responsive foam midsole."
-NK-103,Niek Swiftknit Road,Road running shoe,120,no,"Breathable knit upper built for tempo runs and race day."
-NK-104,Niek Canyon Grip Trail,Trail running shoe,125,no,"Rock plate and deep lugs for dry, technical trails."
-NK-105,Niek Drizzle Shell Jacket,Running apparel,95,yes,"Packable waterproof running jacket with taped seams."
-NK-106,Niek Breeze Run Tee,Running apparel,35,no,"Quick-dry running tee with reflective details."
-NK-107,Niek Coldsnap Run Tights,Running apparel,60,no,"Brushed-fleece tights for cold morning runs."
-NK-108,Niek Trail Crew Socks (3-pack),Running apparel,18,no,"Cushioned merino-blend socks for long trail runs."
+sku,name,short_description,target_customer,price_usd,product_url,important_features,waterproof
+NK-101,Niek Stormline Trail,"Trail runner with a sealed weather membrane for wet, muddy terrain.",Trail runners who train in rain and mud,135,https://niek.example/products/stormline-trail,Sealed weather membrane; 5 mm grippy lugs; Rock plate; Reflective heel,
+NK-102,Niek Pacer Road 2,Lightweight daily trainer with a responsive foam midsole.,New and everyday road runners,110,https://niek.example/products/pacer-road-2,Responsive foam midsole; Breathable mesh upper; 8 mm drop,no
+NK-103,Niek Swiftknit Road,Breathable knit shoe built for tempo runs and race day.,Runners training for 5K to half marathon,120,https://niek.example/products/swiftknit-road,Knit upper; Carbon-infused plate; 7.8 oz weight,no
+NK-104,Niek Canyon Grip Trail,Rugged trail shoe for dry and rocky technical routes.,Hikers and trail runners on rocky terrain,125,https://niek.example/products/canyon-grip-trail,Rock plate; Deep lugs; Toe bumper,no
+NK-105,Niek Drizzle Shell Jacket,Packable running jacket that keeps rain out.,Runners who train in wet weather,95,https://niek.example/products/drizzle-shell-jacket,Waterproof fabric; Taped seams; Packs into its pocket,yes
+NK-106,Niek Breeze Run Tee,Quick-dry running tee for warm days.,Everyday runners,35,https://niek.example/products/breeze-run-tee,Quick-dry fabric; Flat seams; Reflective details,no
+NK-107,Niek Coldsnap Run Tights,Brushed-fleece tights for cold morning runs.,Runners training through winter,60,https://niek.example/products/coldsnap-run-tights,Brushed fleece; Zip ankles; Phone pocket,no
+NK-108,Niek Trail Crew Socks (3-pack),Cushioned socks for long trail runs.,Trail and ultra runners,18,https://niek.example/products/trail-crew-socks,Merino blend; Cushioned sole; Blister-resistant,no

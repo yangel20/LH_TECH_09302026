@@ -169,6 +169,8 @@ Title: "Tell us about the brand"
   (other options: Consumer electronics, Retail & e-commerce, Food & beverage, Home & garden,
   Health & beauty, Local services, Other)
 - Product data (CSV): niek-products.csv (pre-attached sample; "Replace file" to choose another)
+  Columns: sku, name, short_description, target_customer, price_usd, product_url,
+  important_features, waterproof
   Helper: "Your file stays in your browser. Nothing is uploaded."
   Link: "Download the sample CSV"
 Button: "Next: Competitors"
@@ -206,8 +208,8 @@ Button: "Next: See the fix"
 ## Step 6: Optimize
 Title: "Recommended fix"
 Recommended changes:
-- Product page: add "Waterproof" to the title and first line of the description.
-- Product feed: set waterproof = yes.
+- Product page: add "Waterproof" to the title and short description.
+- Product feed: set waterproof = yes and list "Waterproof" first in important features.
 "Every change is approved by the client before it goes live."
 Button: "Approve fix" (required), then "Next: Re-test"
 

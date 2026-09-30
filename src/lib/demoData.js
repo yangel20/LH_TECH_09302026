@@ -178,15 +178,15 @@ export const optimizeCopy = {
   changes: [
     {
       where: 'Product page',
-      what: 'add "Waterproof" to the title and first line of the description.',
-      before: 'Niek Stormline Trail: Trail runner with a sealed weather membrane and grippy lugs for wet, muddy terrain.',
-      after: 'Niek Stormline Trail Waterproof: Waterproof trail runner with a sealed weather membrane and grippy lugs for wet, muddy terrain.',
+      what: 'add "Waterproof" to the title and short description.',
+      before: 'Niek Stormline Trail: Trail runner with a sealed weather membrane for wet, muddy terrain.',
+      after: 'Niek Stormline Trail Waterproof: Waterproof trail runner with a sealed weather membrane for wet, muddy terrain.',
     },
     {
       where: 'Product feed',
-      what: 'set waterproof = yes.',
-      before: 'waterproof: (empty)',
-      after: 'waterproof: yes',
+      what: 'set waterproof = yes and list "Waterproof" first in important features.',
+      before: 'waterproof: (empty) · important_features: Sealed weather membrane; 5 mm grippy lugs; Rock plate; Reflective heel',
+      after: 'waterproof: yes · important_features: Waterproof (sealed weather membrane); 5 mm grippy lugs; Rock plate; Reflective heel',
     },
   ],
   beforeLabel: 'Before',
