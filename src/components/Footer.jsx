@@ -1,8 +1,15 @@
+import { company } from '../lib/company.js';
+import './Footer.css';
+
 export default function Footer() {
   return (
-    <footer style={{ borderTop: '1px solid var(--color-border)', marginTop: 'var(--space-6)' }}>
-      <div className="container" style={{ padding: 'var(--space-4) var(--space-3)', color: 'var(--color-text-muted)', fontSize: 'var(--text-sm)' }}>
-        Nexo, built by Team LH for the hackathon. Demo data is simulated.
+    <footer className="footer">
+      <div className="container footer__inner">
+        <picture>
+          <source srcSet="/brand/nexo-icon-light.svg" media="(prefers-color-scheme: dark)" />
+          <img className="footer__icon" src="/brand/nexo-icon.svg" alt="" width="24" height="24" />
+        </picture>
+        <p className="footer__text">{company.footer}</p>
       </div>
     </footer>
   );

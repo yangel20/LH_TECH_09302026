@@ -5,39 +5,61 @@
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
 }
+.nav__skip {
+  position: absolute;
+  left: var(--space-3);
+  top: -100px;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  border-radius: var(--radius-sm);
+  z-index: 20;
+}
+.nav__skip:focus { top: var(--space-2); }
 .nav__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-3);
-  min-height: 60px;
+  gap: var(--space-2) var(--space-3);
+  min-height: 64px;
   flex-wrap: wrap;
+  padding-block: var(--space-2);
 }
 .nav__brand {
-  font-weight: 800;
-  font-size: var(--text-lg);
-  color: var(--color-primary);
-  text-decoration: none;
+  display: inline-flex;
+  border-radius: var(--radius-sm);
 }
+.nav__brand img { height: 32px; width: auto; }
 .nav__links {
   display: flex;
-  gap: var(--space-2);
+  gap: var(--space-1);
   list-style: none;
   margin: 0;
   padding: 0;
-  flex-wrap: wrap;
 }
 .nav__links a {
   display: block;
-  padding: var(--space-1) var(--space-2);
+  padding: var(--space-2) var(--space-2);
   border-radius: var(--radius-sm);
   color: var(--color-text-muted);
   text-decoration: none;
   font-size: var(--text-sm);
+  white-space: nowrap;
 }
-.nav__links a:hover { color: var(--color-text); }
+.nav__links a:hover { color: var(--color-text); background: var(--color-primary-soft); }
 .nav__links a.active {
   color: var(--color-primary);
   background: var(--color-primary-soft);
   font-weight: 600;
+}
+
+/* Phones: logo on its own row, links spread across the full width underneath. */
+@media (max-width: 559px) {
+  .nav__inner > nav { width: 100%; }
+  .nav__links { justify-content: space-between; }
+  .nav__links a { padding-inline: var(--space-2); }
+}
+@media (min-width: 560px) {
+  .nav__links { gap: var(--space-2); }
+  .nav__links a { padding-inline: var(--space-3); font-size: var(--text-md); }
 }

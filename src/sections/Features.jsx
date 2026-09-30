@@ -1,8 +1,7 @@
+import { steps, difference } from '../lib/company.js';
 import './Features.css';
 
-// PLACEHOLDER. Owner: Codex (task #4). Text comes from CONTENT.md.
-const steps = ['Monitor', 'Analyze', 'Investigate', 'Optimize'];
-
+// PLACEHOLDER. Owner: Codex (task #3). Replace freely; keep id="how-it-works" (the hero button scrolls here).
 export default function Features() {
   return (
     <section className="features section" id="how-it-works">
@@ -10,9 +9,14 @@ export default function Features() {
         <h2>How it works</h2>
         <ol className="features__grid">
           {steps.map((s) => (
-            <li key={s} className="card"><strong>{s}</strong> <span className="todo">[TODO task #4]</span></li>
+            <li key={s.title} className="card">
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+            </li>
           ))}
         </ol>
+        <h3>{difference.title}</h3>
+        <p>{difference.text}</p>
       </div>
     </section>
   );

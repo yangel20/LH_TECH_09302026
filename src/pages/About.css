@@ -1,1 +1,2 @@
 /* Owner: Codex (task #6) */
+.about__founders { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-4); }

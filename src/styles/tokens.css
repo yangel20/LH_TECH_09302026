@@ -1,13 +1,21 @@
 /* Design tokens + reset + layout. Owner: Lead (Claude). Everyone else: USE these variables, don't hard-code colors. */
 :root {
-  --color-bg: #f7f8fb;
+  /* Brand: purple #351B5C (primary), green #00BB7D (accent).
+     Green is for accents only (borders, icons, highlights). Never use it as text on white or
+     put white text on it: both fail contrast. For green TEXT use --color-accent-text. */
+  --color-bg: #faf8fc;
   --color-surface: #ffffff;
-  --color-text: #141a2b;
-  --color-text-muted: #5b6478;
-  --color-border: #e3e6ee;
-  --color-primary: #4f46e5;
-  --color-primary-soft: #eef0ff;
-  --color-accent: #0ea5a4;
+  --color-text: #1c1426;
+  --color-text-muted: #5e566b;
+  --color-border: #e6e0ee;
+  --color-primary: #351b5c;
+  --color-primary-hover: #4a2a7c;
+  --color-primary-soft: #efe9f7;
+  --color-on-primary: #ffffff;
+  --color-accent: #00bb7d;
+  --color-accent-soft: #e3f7ef;
+  --color-accent-text: #007a52;
+  --color-focus: #00bb7d;
   --color-success: #15803d;
   --color-success-soft: #e8f7ee;
   --color-warning: #b45309;
@@ -32,25 +40,31 @@
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 20px;
-  --shadow-card: 0 1px 3px rgba(20, 26, 43, 0.08), 0 4px 16px rgba(20, 26, 43, 0.04);
+  --shadow-card: 0 1px 3px rgba(28, 20, 38, 0.08), 0 4px 16px rgba(28, 20, 38, 0.04);
   --max-width: 1120px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #0e1220;
-    --color-surface: #161b2d;
-    --color-text: #e8ebf4;
-    --color-text-muted: #9aa3b8;
-    --color-border: #283049;
-    --color-primary: #8b85ff;
-    --color-primary-soft: #23264a;
+    --color-bg: #130e1c;
+    --color-surface: #1d1629;
+    --color-text: #eeeaf4;
+    --color-text-muted: #a79fb6;
+    --color-border: #342a45;
+    --color-primary: #c2aef0;
+    --color-primary-hover: #d5c7f5;
+    --color-primary-soft: #2c2140;
+    --color-on-primary: #1c1133;
+    --color-accent: #00bb7d;
+    --color-accent-soft: #10302a;
+    --color-accent-text: #3fd6a0;
     --color-success-soft: #12301f;
     --color-warning-soft: #33250f;
     --color-danger-soft: #3a1717;
     --color-success: #4ade80;
     --color-warning: #fbbf24;
     --color-danger: #f87171;
+    --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.25);
   }
 }
 
@@ -64,7 +78,18 @@ body {
   background: var(--color-bg);
 }
 img { max-width: 100%; display: block; }
+/* Footer stays at the bottom on short pages. */
+#root { min-height: 100vh; display: flex; flex-direction: column; }
+#main { flex: 1; }
 a { color: var(--color-primary); }
+:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.section__intro { color: var(--color-text-muted); max-width: 60ch; margin: 0 0 var(--space-5); }
 h1, h2, h3 { line-height: 1.2; margin: 0 0 var(--space-3); }
 
 .container {
@@ -87,18 +112,20 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 var(--space-3); }
   border-radius: var(--radius-sm);
   border: 1px solid transparent;
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-on-primary);
   font: inherit;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
 }
+.btn:hover { background: var(--color-primary-hover); }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .btn--ghost {
   background: transparent;
   color: var(--color-primary);
   border-color: var(--color-primary);
 }
+.btn--ghost:hover { background: var(--color-primary-soft); }
 .badge {
   display: inline-block;
   padding: 2px var(--space-2);
@@ -108,6 +135,7 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 var(--space-3); }
   background: var(--color-primary-soft);
   color: var(--color-primary);
 }
+.badge--accent { background: var(--color-accent-soft); color: var(--color-accent-text); }
 .badge--success { background: var(--color-success-soft); color: var(--color-success); }
 .badge--warning { background: var(--color-warning-soft); color: var(--color-warning); }
 .badge--danger { background: var(--color-danger-soft); color: var(--color-danger); }

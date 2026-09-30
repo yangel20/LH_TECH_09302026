@@ -9,13 +9,13 @@ Owners: Claude (lead), Codex, Human
 | 1 | React/Vite shell, routes, nav, footer, design tokens | Claude | src/App.jsx, src/components/*, src/styles/tokens.css | DONE |
 | 2 | README, run.sh, Vercel config, /api/health | Claude | README.md, run.sh, vercel.json, api/ | DONE |
 
-## Phase 2 — Parallel build
+## Phase 2 — Company website (text data: src/lib/company.js, from CONTENT.md)
 | # | Task | Owner | Files | Status |
 |---|------|-------|-------|--------|
-| 3 | Hero: pitch, the problem (lost visibility + brand damage), "Try the demo" button | Codex | src/sections/Hero.jsx, Hero.css | TODO |
-| 4 | Features: 4 steps (Monitor/Analyze/Investigate/Optimize) + "What makes us different" | Codex | src/sections/Features.jsx, Features.css | TODO |
-| 5 | Demo: simulated audit of the gaming-laptop example. Run audit → AI answer omits laptop → Analyze → Investigate (watt-hours, no hours) → Approve fix (human review) → Re-test, laptop now included. Labeled "Simulated". | Claude | src/pages/Demo.jsx, Demo.css, src/lib/demoData.js | TODO |
-| 6 | About: governance & ethics, impact metrics, team, closing line | Codex | src/pages/About.jsx, About.css | TODO |
+| 2b | Company setup: brand tokens, logo nav, routes, company.js, Avatar, footer, placeholders | Claude | tokens.css, App.jsx, main.jsx, index.html, src/components/*, src/lib/company.js | DONE |
+| 3 | Home sections: Hero (slogan, description, 2 buttons, the problem + 2 risks), How it works (4 steps + "What makes us different", keep `id="how-it-works"`), Metrics (20% headline WITH the goals label), Testimonials (3 quotes + disclaimer line, always), Call to action | Codex (hero) | src/sections/Hero.jsx+.css, Features.jsx+.css, Metrics.jsx+.css, Testimonials.jsx+.css, CallToAction.jsx+.css | TODO |
+| 4 | Mission page: Mission, Vision, Values (4), Metrics: goals under "Our 90-day goals for every client" + "How we work" process facts | Codex (mission) | src/pages/Mission.jsx, Mission.css | TODO |
+| 6 | About Us page: Our story, "Meet the founders" grid (5, use `<Avatar>`), "How we keep AI answers honest" (6 items), `<CallToAction />` at the bottom | Codex (about) | src/pages/About.jsx, About.css | TODO |
 
 ## Phase 3 — Review & polish
 | # | Task | Owner | Files | Status |
@@ -26,7 +26,9 @@ Owners: Claude (lead), Codex, Human
 | 10 | Screenshot for README, check live Vercel URL, submit repo link | Human | README.md, public/ | TODO |
 
 ## Later (not now)
+- #5 Demo: simulated audit of the gaming-laptop example (Claude). Data: `demoExample` in src/lib/company.js. Labeled "Simulated".
 - Mini-CRM backend: clients, products, audits, approvals (Vercel Functions + a database)
 
 ## Requests (need a change in a file you don't own)
-- Human (business): fill [TODO]s in CONTENT.md: target market, business model, team
+- Human (business): team email for the "Contact us" button (CONTENT.md [TODO: team email]) → Lead sets `cta.email` in src/lib/company.js
+- Human (business): optional one-line founder bios → Lead sets `bio` in src/lib/company.js

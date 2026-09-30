@@ -69,7 +69,7 @@ session in the terminal can pick up where it left off. Written 2026-09-30.
 - [x] Assets pushed to GitHub
 - [x] New CONTENT.md (with SITE MAP section) committed to main
 - [x] Vercel connected: https://nexo-one-cyan.vercel.app (in README.md and run.sh LIVE_URL)
-- [ ] NEXT FOR CLAUDE: the "company setup" task below
+- [x] Company setup task (branch agent/claude-company-setup, merged to main)
 - [ ] Then: `./scripts/setup-agents.sh mission about`; merge origin/main into codex-hero; start 3 Codex agents
 - [ ] Review + merge each Codex branch; final README/run.sh check; submit repo link
 - [ ] Still needed from the team: contact email for the CTA; optional founder bios

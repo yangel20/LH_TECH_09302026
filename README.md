@@ -1,4 +1,4 @@
-# Nexo: get recommended, and described correctly, by AI shopping assistants
+# Nexo: Connecting brands to better answers.
 
 > **Live demo:** https://nexo-one-cyan.vercel.app, no install needed.
 
@@ -19,12 +19,11 @@ gaming laptop that AI assistants were leaving out. AI responses in the demo are 
 so it runs with no API keys.
 
 ## How to navigate it (judges start here)
-1. Open the **live demo** link above.
-2. Click **Try the demo** on the home page (or **Demo** in the menu).
-3. Click **Run audit**. You'll see a simulated AI answer that leaves out the client's laptop, then
-   Nexo's analysis of why, then a recommended fix.
-4. Click **Approve fix & re-test**. The laptop now appears in the AI's recommendation.
-5. **About** covers our governance approach, impact metrics and team.
+1. Open the **live demo** link above. The menu has four pages: **Home, Mission, About Us, Demo**.
+2. **Home**: what Nexo does, the problem, how it works (4 steps), our 90-day goal, testimonials.
+3. **Mission**: mission, vision, values, and our goals vs. how we work.
+4. **About Us**: our story, the five founders, and how we keep AI answers honest.
+5. **Demo** (coming next): a simulated audit of a gaming laptop that AI assistants leave out.
 
 ## Tech / frameworks
 - **React 18** + **Vite**, JavaScript, React Router, plain CSS with design tokens
@@ -61,11 +60,11 @@ For development with hot reload: `npm install && npm run dev`.
 ## Project structure
 ```
 src/
-  pages/        Home, Demo, About
-  sections/     Hero, Features (home page sections)
-  components/   Nav, Footer
+  pages/        Home, Mission, About, Demo
+  sections/     Hero, Features, Metrics, Testimonials, CallToAction (home page)
+  components/   Nav, Footer, Avatar
   styles/       tokens.css (design system)
-  lib/          api client, demo data
+  lib/          company.js (all site text, from CONTENT.md), api client
 api/            Vercel Functions (backend)
 scripts/        local API runner, agent setup script
 CONTENT.md      all site text, written by our business team
@@ -81,4 +80,8 @@ run.sh          build + run + health check
 ## Team (LH)
 | Name | Role |
 |------|------|
-| [TODO] | |
+| Racielly Mella | Chief Executive Officer (CEO) |
+| Chiamaka Elezieanya | Chief Financial Officer (CFO) |
+| Lena George | Chief Marketing Officer (CMO) |
+| Yangel Aguilera | Chief Technology Officer (CTO) |
+| Daniela Loveridge | Chief Operating Officer (COO) |
