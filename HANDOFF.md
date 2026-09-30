@@ -67,7 +67,7 @@ session in the terminal can pick up where it left off. Written 2026-09-30.
 - [x] Logo + favicon files in `public/` (SVG logos, 2026-09-29)
 - [x] Team photos in `public/team/` (all five founders; Racielly's is 200px, others 400px)
 - [x] Assets pushed to GitHub
-- [ ] New CONTENT.md (with SITE MAP section) committed to main: BLOCKS the company setup task
+- [x] New CONTENT.md (with SITE MAP section) committed to main
 - [x] Vercel connected: https://nexo-one-cyan.vercel.app (in README.md and run.sh LIVE_URL)
 - [ ] NEXT FOR CLAUDE: the "company setup" task below
 - [ ] Then: `./scripts/setup-agents.sh mission about`; merge origin/main into codex-hero; start 3 Codex agents
