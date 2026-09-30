@@ -72,6 +72,7 @@ src/
   styles/       tokens.css (design system)
   lib/          company.js (site text), demoData.js + dashboardData.js (demo mock data), csv.js
 api/            Vercel Functions (backend)
+docs/           architecture plan + wireframes for the real product
 scripts/        local API runner
 CONTENT.md      all site text, written by our business team
 AGENTS.md       rules shared by every AI agent
@@ -80,6 +81,9 @@ run.sh          build + run + health check
 ```
 
 ## Roadmap
+Planning docs for the real product: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) (system design,
+data pipeline, storage, budget) and [docs/WIREFRAMES.md](docs/WIREFRAMES.md) (every screen).
+
 - Mini-CRM backend: client accounts, product catalogs, audit history and fix approvals.
 
 ## Team (LH)
