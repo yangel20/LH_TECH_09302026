@@ -55,11 +55,53 @@ The real product (accounts, database, AWS pipeline, real AI calls) is planned in
    5. **Consultation**: pick times to meet a Nexo data analyst and consultant, then **Request consultation**.
 
 ## Tech / frameworks
-- **React 18** + **Vite**, JavaScript, React Router, plain CSS with design tokens
-- **Vercel** hosting (free Hobby plan) + a Vercel Function (`api/health.js`) as the backend slot
-- Built with a multi-agent AI workflow: **Claude Code** (lead, architect, reviewer) and several
-  **OpenAI Codex** agents (parallel builders), coordinated through `AGENTS.md` and `TASKS.md`,
-  one git branch per agent
+**Website + demo (built):**
+| Layer | What we use |
+|---|---|
+| Front end | **React 18**, **Vite 5**, **React Router 6**, plain JavaScript (JSX) |
+| Styling | Plain CSS with a design-token system (`src/styles/tokens.css`): brand colors, light + dark mode, accessibility-checked contrast |
+| Charts | Hand-built **SVG** charts (line chart with hover and keyboard support, quadrant chart), using a colorblind-safe palette we validated. No chart library |
+| Data | A small in-browser **CSV parser** (`src/lib/csv.js`); uploaded files never leave the browser |
+| Backend | **Vercel Function** (`api/health.js`), also run locally by `scripts/local-api.js` |
+| Hosting | **Vercel** (free plan): every push to `main` deploys the live site |
+| Dependencies | Only 3 runtime packages: `react`, `react-dom`, `react-router-dom` |
+
+**Real product (planned, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)):** Node.js modular
+monolith on **AWS** (ECS Fargate web + worker, SQS, PostgreSQL on RDS, Redis, S3 → Glacier,
+SES), an open model on **Ollama** for question generation and answer judging, and the
+**OpenAI API** for AI answers.
+
+## How we used AI to build this
+Our CTO, Yangel Aguilera, is the team's only technical person. To build a full website, an
+interactive demo and a product plan in a hackathon, he ran a small **AI development team**
+and kept the decisions for himself:
+
+- **Claude Code (lead / architect):** planned the work, built the design system, routes,
+  navigation and the demo, wrote the architecture and wireframe docs, and **reviewed and merged**
+  every other agent's work (checking file ownership, colors, text, mobile layout and the build).
+- **OpenAI Codex (builders):** three agents worked **in parallel**, each in its own git
+  worktree and branch, building the Home sections, the Mission page and the About Us page.
+- **The business team** wrote every word of site copy in a shared doc, which became `CONTENT.md`;
+  agents may read it but never invent copy.
+- **Yangel (human in charge):** set the direction, sketched the real product on a whiteboard,
+  made every product decision (demo flow, dashboard, pricing tiers, storage, security), and
+  approved each change before it went live.
+
+**Workflow and guardrails:**
+1. **Rules in the repo:** `AGENTS.md` (shared rules and file ownership, so agents never edit the
+   same files), `CLAUDE.md` (the lead's role) and `TASKS.md` (the task board every agent updates).
+2. **One branch per task:** agents work on `agent/*` branches; `main` is the live site and only
+   receives reviewed work that passes `npm run build`.
+3. **Review before merge:** the lead checks each branch against the rules and CONTENT.md, takes
+   screenshots at phone and desktop size in light and dark mode, and sends a numbered fix list
+   back to the agent when something is off (e.g. a wrong heading).
+4. **Local first, deploy in batches:** changes are merged and previewed locally; Yangel pushes
+   to `main` (which updates the live site) only when a meaningful batch is ready.
+5. **Honesty rules:** goals are labeled as goals, testimonials as illustrative, and everything
+   simulated as "Simulated". The demo uses only fictional brands.
+6. **From whiteboard to plan:** Yangel's whiteboard sketch of the real system was turned into
+   [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) and [docs/WIREFRAMES.md](docs/WIREFRAMES.md)
+   through a question-and-answer session with the lead agent.
 
 ## How to run it
 You don't need to: use the live link. To run locally (Node.js 18+):
