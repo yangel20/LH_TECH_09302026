@@ -66,10 +66,42 @@ The real product (accounts, database, AWS pipeline, real AI calls) is planned in
 | Hosting | **Vercel** (free plan): every push to `main` deploys the live site |
 | Dependencies | Only 3 runtime packages: `react`, `react-dom`, `react-router-dom` |
 
-**Real product (planned, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)):** Node.js modular
-monolith on **AWS** (ECS Fargate web + worker, SQS, PostgreSQL on RDS, Redis, S3 → Glacier,
-SES), an open model on **Ollama** for question generation and answer judging, and the
-**OpenAI API** for AI answers.
+**The real product (planned): how it will work**
+
+The demo simulates the flow; the real platform runs it for real. It is designed as one codebase
+(a *modular monolith*) on **AWS**, split into a fast **web app** and a background **worker**, so
+long AI jobs never slow the website down.
+
+| Layer | Planned tech | Job |
+|---|---|---|
+| Web app + API | **React** front end, **Node.js** API on **AWS ECS Fargate**, behind **CloudFront** | Logins, uploads, dashboards |
+| Background worker | Same Node.js code on ECS Fargate, fed by an **Amazon SQS** job queue | ETL, question generation, AI calls, scoring |
+| Database | **PostgreSQL** (Amazon RDS) | Accounts, products, questions, runs, scores, fixes |
+| Files + archive | **Amazon S3** → **S3 Glacier** after 1 year (nothing deleted) | Uploaded product files, raw AI answers, reports |
+| Cache | **Redis** (ElastiCache) + precomputed dashboard snapshots | Fast dashboards, fewer paid API calls |
+| Question writer + judge | Open model on **Ollama** (local now, AWS GPU server later) | Writes shopper questions, judges sentiment and accuracy |
+| AI answers | **OpenAI API** with web search first; Gemini, Claude, Perplexity later | The answers we measure |
+| Email, secrets, cost control | **Amazon SES**, **Secrets Manager**, **AWS Budgets** | Notifications, API keys, spend alerts |
+
+**What happens in one audit:**
+1. The brand uploads product data (CSV, Parquet, Excel or JSON) straight to **S3**.
+2. An **ETL job** maps the columns, validates and cleans the data, and saves products to **Postgres**.
+3. The open model writes **synthetic shopper questions** from each product's description,
+   target customer, features and price, plus the competitor list.
+4. The brand **reviews the questions** (edit, remove, add).
+5. The worker checks the monthly **quota**, then asks each AI tool every question as a
+   **US shopper**. Answers younger than **30 days** are reused from the cache (re-tests
+   always get fresh answers). Raw answers are stored in S3.
+6. **Scoring:** rules detect mentions, position, competitors and cited sources; the open model
+   judges sentiment and flags **claims that contradict the product data**, which an analyst confirms.
+7. The results are saved once as a **dashboard snapshot** and the brand gets an email.
+8. A consultant recommends fixes, the brand **approves** them and updates its own site, and
+   Nexo **re-tests** the affected questions to show before vs after.
+
+**Built-in guardrails:** our own login with 2FA and roles (Owner, Member, Viewer; Nexo
+Analyst, Consultant, Admin), per-client monthly question quotas (alerts at 80%, pause at 100%),
+AWS Budgets alerts, encryption everywhere, and every approval logged. Full details, risks and
+build phases: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · screens: [docs/WIREFRAMES.md](docs/WIREFRAMES.md).
 
 ## How we used AI to build this
 Our CTO, Yangel Aguilera, is the team's only technical person. To build a full website, an
