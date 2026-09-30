@@ -1,0 +1,2 @@
+/* Owner: Codex (task #4) */
+.features__grid { list-style: none; padding: 0; display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }

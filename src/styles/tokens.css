@@ -1,0 +1,114 @@
+/* Design tokens + reset + layout. Owner: Lead (Claude). Everyone else: USE these variables, don't hard-code colors. */
+:root {
+  --color-bg: #f7f8fb;
+  --color-surface: #ffffff;
+  --color-text: #141a2b;
+  --color-text-muted: #5b6478;
+  --color-border: #e3e6ee;
+  --color-primary: #4f46e5;
+  --color-primary-soft: #eef0ff;
+  --color-accent: #0ea5a4;
+  --color-success: #15803d;
+  --color-success-soft: #e8f7ee;
+  --color-warning: #b45309;
+  --color-warning-soft: #fff4e5;
+  --color-danger: #b91c1c;
+  --color-danger-soft: #fdecec;
+
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-2xl: clamp(2rem, 5vw, 3.25rem);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --space-6: 64px;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --shadow-card: 0 1px 3px rgba(20, 26, 43, 0.08), 0 4px 16px rgba(20, 26, 43, 0.04);
+  --max-width: 1120px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0e1220;
+    --color-surface: #161b2d;
+    --color-text: #e8ebf4;
+    --color-text-muted: #9aa3b8;
+    --color-border: #283049;
+    --color-primary: #8b85ff;
+    --color-primary-soft: #23264a;
+    --color-success-soft: #12301f;
+    --color-warning-soft: #33250f;
+    --color-danger-soft: #3a1717;
+    --color-success: #4ade80;
+    --color-warning: #fbbf24;
+    --color-danger: #f87171;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  line-height: 1.55;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+img { max-width: 100%; display: block; }
+a { color: var(--color-primary); }
+h1, h2, h3 { line-height: 1.2; margin: 0 0 var(--space-3); }
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+.section { padding: var(--space-6) 0; }
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-4);
+}
+.btn {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: var(--color-primary);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn--ghost {
+  background: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.badge {
+  display: inline-block;
+  padding: 2px var(--space-2);
+  border-radius: 999px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+.badge--success { background: var(--color-success-soft); color: var(--color-success); }
+.badge--warning { background: var(--color-warning-soft); color: var(--color-warning); }
+.badge--danger { background: var(--color-danger-soft); color: var(--color-danger); }
+.todo { background: var(--color-warning-soft); color: var(--color-warning); padding: 0 4px; border-radius: 4px; }
