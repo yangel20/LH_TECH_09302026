@@ -4,7 +4,7 @@ set -e
 cd "$(dirname "$0")"
 
 PORT="${PORT:-4173}"
-LIVE_URL="https://YOUR-PROJECT.vercel.app"
+LIVE_URL="https://nexo-one-cyan.vercel.app"
 
 echo "Live version: $LIVE_URL"
 command -v node >/dev/null 2>&1 || { echo "ERROR: Node.js 18+ is required (https://nodejs.org)" >&2; exit 1; }

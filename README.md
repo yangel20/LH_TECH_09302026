@@ -1,6 +1,6 @@
 # Nexo: get recommended, and described correctly, by AI shopping assistants
 
-> **Live demo:** https://YOUR-PROJECT.vercel.app, no install needed.
+> **Live demo:** https://nexo-one-cyan.vercel.app, no install needed.
 
 ![Nexo screenshot](public/screenshot.png)
 
@@ -41,7 +41,7 @@ You don't need to: use the live link. To run locally (Node.js 18+):
 ```
 Expected output:
 ```
-Live version: https://YOUR-PROJECT.vercel.app
+Live version: https://nexo-one-cyan.vercel.app
 Installing dependencies...
 Building...
 Starting Nexo on http://localhost:4173 ...
