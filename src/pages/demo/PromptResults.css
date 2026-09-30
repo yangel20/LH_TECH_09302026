@@ -1,0 +1,13 @@
+.prompts__list { list-style: none; margin: 0; padding: var(--space-2); display: grid; gap: var(--space-2); }
+.prompts__item {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2);
+  padding: var(--space-2) var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+}
+.prompts__item--headline { border-color: var(--color-primary); }
+.prompts__main { min-width: 0; flex: 1 1 16rem; }
+.prompts__q { margin: 0; font-size: var(--text-sm); font-weight: 600; }
+.prompts__meta { margin: 2px 0 0; display: flex; flex-wrap: wrap; gap: var(--space-3); font-size: 0.75rem; color: var(--color-text-muted); }
+.prompts__status { flex-shrink: 0; font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: var(--space-1); padding: 2px 8px; border-radius: 999px; }
+.prompts__status--yes { color: var(--color-success); background: var(--color-success-soft); }
+.prompts__status--no { color: var(--color-danger); background: var(--color-danger-soft); }
+.prompts__status--wrong { color: var(--color-warning); background: var(--color-warning-soft); }

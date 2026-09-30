@@ -201,11 +201,18 @@ Disclaimer: "Model names are shown for illustration. No models are called in thi
 Summary: "100 prompts × 5 models = 500 simulated tests" (changes with the models chosen)
 Button: "Next: Run AI check"
 
-## Step 4: Monitor
-Title: "What AI recommends today"
-Shopper question: "What are the best waterproof running shoes under $150?"
-Asked to each chosen AI model (simulated answers).
-Result: "Niek is recommended in 0 of 5 answers. Competitors are recommended instead." (count = models chosen)
+## Step 4: Dashboard
+Title: "AI visibility dashboard" (replaces the earlier Monitor step; CRM-style, all mock numbers)
+Header: "Brand report / Niek / Overview" · "Simulated data" · filters: Last 14 days, United States,
+model tabs (All models + each chosen model)
+Line: "Report based on 100 prompts × 5 models = 500 simulated tests"
+KPI tiles: AI visibility score (% + "Mentioned in X/Y responses"), Your brand mentions (vs top 3
+competitors), Your average position (lower is better), Sentiment ("1 inaccurate claim found")
+Panels: Brand coverage over time (Niek + up to 5 competitors, 14 days), Brand ranking
+(sentiment, mentions, coverage, share of voice), Niek in the test prompts (10 of 100, each
+Mentioned / Not mentioned / Mentioned · inaccurate), Brand visibility index (coverage vs
+likelihood to buy: Leaders, Niche, Low conversion, Low performance)
+All numbers are simulated and follow the competitors and models chosen earlier.
 Button: "Next: Analyze answers"
 
 ## Step 5: Analyze

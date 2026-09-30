@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   demoCopy, formDefaults, formCopy, competitorsCopy, knownCompetitors, defaultCompetitorNames,
-  makeCompetitor, buildAnswers, monitorCopy, retestCopy, models, testDataCopy, analyzeRows,
+  makeCompetitor, buildAnswers, retestCopy, models, testDataCopy, analyzeRows,
 } from '../lib/demoData.js';
 import { parseCsv } from '../lib/csv.js';
 import DemoStepper from './demo/DemoStepper.jsx';
@@ -9,6 +9,7 @@ import DemoNav from './demo/DemoNav.jsx';
 import StartForm from './demo/StartForm.jsx';
 import Competitors from './demo/Competitors.jsx';
 import TestData from './demo/TestData.jsx';
+import Dashboard from './demo/Dashboard.jsx';
 import AiAnswers from './demo/AiAnswers.jsx';
 import Analyze from './demo/Analyze.jsx';
 import Investigate from './demo/Investigate.jsx';
@@ -68,7 +69,6 @@ export default function Demo() {
   }, [step]);
 
   const chosen = useMemo(() => models.filter((m) => chosenIds.includes(m.id)), [chosenIds]);
-  const before = useMemo(() => buildAnswers(competitors, chosen), [competitors, chosen]);
   const after = useMemo(() => buildAnswers(competitors, chosen, { after: true }), [competitors, chosen]);
   const current = demoCopy.steps[step];
   const key = current.key;
@@ -146,9 +146,7 @@ export default function Demo() {
                 error={errors.testdata}
               />
             )}
-            {key === 'monitor' && (
-              <AiAnswers answers={before} competitors={competitors} result={monitorCopy.resultBefore(chosen.length)} />
-            )}
+            {key === 'dashboard' && <Dashboard competitors={competitors} chosen={chosen} />}
             {key === 'analyze' && <Analyze rows={analyzeRows(chosen)} />}
             {key === 'investigate' && <Investigate sample={sample} usingSample={file?.isSample} />}
             {key === 'optimize' && <Optimize approved={approved} onApprove={() => setApproved(true)} />}

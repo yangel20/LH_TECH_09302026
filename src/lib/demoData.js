@@ -13,7 +13,7 @@ export const demoCopy = {
     { key: 'start', label: 'Start', title: 'Tell us about the brand', next: 'Next: Competitors' },
     { key: 'competitors', label: 'Competitors', title: 'Who do you compete with?', next: 'Next: Build test data' },
     { key: 'testdata', label: 'Test data', title: 'Build test data', next: 'Next: Run AI check' },
-    { key: 'monitor', label: 'Monitor', title: 'What AI recommends today', next: 'Next: Analyze answers' },
+    { key: 'dashboard', label: 'Dashboard', title: 'AI visibility dashboard', next: 'Next: Analyze answers' },
     { key: 'analyze', label: 'Analyze', title: 'What AI got wrong', next: 'Next: Find the cause' },
     { key: 'investigate', label: 'Investigate', title: 'Why it happened', next: 'Next: See the fix' },
     { key: 'optimize', label: 'Optimize', title: 'Recommended fix', next: 'Next: Re-test' },
@@ -147,7 +147,7 @@ export function buildPrompts(competitors) {
   ];
 }
 
-// ---- Step 4: Monitor / Step 8: Re-test ----
+// ---- Step 8: Re-test (answer cards). Step 4 is the dashboard: see dashboardData.js ----
 export const niekProduct = {
   brand: 'Niek',
   sku: 'NK-101',
