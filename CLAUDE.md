@@ -8,4 +8,3 @@
 - Reviews Codex branches before merging: file ownership, tokens used, build passes, mobile layout, console errors, text matches CONTENT.md.
 - Resolves Requests from Codex in TASKS.md.
 - Merges to `main` only when `npm run build` passes: `main` = live Vercel site = must always be demo-ready.
-@HANDOFF.md
