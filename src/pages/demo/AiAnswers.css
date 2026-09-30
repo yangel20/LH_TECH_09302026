@@ -33,6 +33,7 @@
   margin: var(--space-3) 0 0; padding: var(--space-2); font-size: var(--text-sm);
   background: var(--color-danger-soft); color: var(--color-danger); border-radius: var(--radius-sm);
 }
+.answers__sim { margin: var(--space-3) 0 0; font-size: 0.75rem; color: var(--color-text-muted); font-style: italic; }
 .answers__score { margin-top: var(--space-5); }
 .answers__score-title { font-size: var(--text-md); }
 .answers__bars { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
@@ -44,6 +45,7 @@
 .answers__bar--client .answers__bar-track span { background: var(--color-accent); }
 .answers__bar-count { color: var(--color-text-muted); }
 @media (min-width: 640px) {
-  .answers__bar { grid-template-columns: 10rem 1fr 7.5rem; align-items: center; gap: var(--space-3); }
+  .answers__bar { grid-template-columns: 10rem 1fr 8rem; align-items: center; gap: var(--space-3); }
 }
-@media (min-width: 900px) { .answers__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 640px) { .answers__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .answers__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }

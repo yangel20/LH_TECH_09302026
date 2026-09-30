@@ -1,13 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   demoCopy, formDefaults, formCopy, competitorsCopy, knownCompetitors, defaultCompetitorNames,
-  makeCompetitor, buildAnswers, monitorCopy, retestCopy,
+  makeCompetitor, buildAnswers, monitorCopy, retestCopy, models, testDataCopy, analyzeRows,
 } from '../lib/demoData.js';
 import { parseCsv } from '../lib/csv.js';
 import DemoStepper from './demo/DemoStepper.jsx';
 import DemoNav from './demo/DemoNav.jsx';
 import StartForm from './demo/StartForm.jsx';
 import Competitors from './demo/Competitors.jsx';
+import TestData from './demo/TestData.jsx';
 import AiAnswers from './demo/AiAnswers.jsx';
 import Analyze from './demo/Analyze.jsx';
 import Investigate from './demo/Investigate.jsx';
@@ -41,6 +42,8 @@ export default function Demo() {
   const [file, setFile] = useState(null);
   const [competitors, setCompetitors] = useState(initialCompetitors);
   const [approved, setApproved] = useState(false);
+  const [generated, setGenerated] = useState(false);
+  const [chosenIds, setChosenIds] = useState(() => models.map((m) => m.id));
   const headingRef = useRef(null);
   const topRef = useRef(null);
   const firstRender = useRef(true);
@@ -64,27 +67,35 @@ export default function Demo() {
     headingRef.current?.focus({ preventScroll: true });
   }, [step]);
 
-  const before = useMemo(() => buildAnswers(competitors), [competitors]);
-  const after = useMemo(() => buildAnswers(competitors, { after: true }), [competitors]);
+  const chosen = useMemo(() => models.filter((m) => chosenIds.includes(m.id)), [chosenIds]);
+  const before = useMemo(() => buildAnswers(competitors, chosen), [competitors, chosen]);
+  const after = useMemo(() => buildAnswers(competitors, chosen, { after: true }), [competitors, chosen]);
   const current = demoCopy.steps[step];
+  const key = current.key;
   const isLast = step === demoCopy.steps.length - 1;
 
   function next() {
-    if (step === 0) {
+    if (key === 'start') {
       const found = validateForm(form, file);
       setErrors(found);
       if (Object.keys(found).length) return;
     }
+    if (key === 'testdata') {
+      const msg = !generated ? testDataCopy.generateError : !chosenIds.length ? testDataCopy.modelsError : '';
+      setErrors((e) => ({ ...e, testdata: msg || undefined }));
+      if (msg) return;
+    }
     if (isLast) {
       setStep(0); setForm(formDefaults); setFile(sample); setErrors({});
       setCompetitors(initialCompetitors()); setApproved(false);
+      setGenerated(false); setChosenIds(models.map((m) => m.id));
       return;
     }
     setStep((s) => s + 1);
   }
 
   const nextDisabled =
-    (step === 1 && competitors.length < competitorsCopy.min) || (step === 5 && !approved);
+    (key === 'competitors' && competitors.length < competitorsCopy.min) || (key === 'optimize' && !approved);
 
   return (
     <div className="demo">
@@ -103,7 +114,7 @@ export default function Demo() {
           <div className="demo__panel card">
             <h2 className="demo__step-title" ref={headingRef} tabIndex={-1}>{current.title}</h2>
 
-            {step === 0 && (
+            {key === 'start' && (
               <StartForm
                 form={form}
                 errors={errors}
@@ -114,21 +125,35 @@ export default function Demo() {
                 onFileError={(msg) => setErrors((e) => ({ ...e, file: msg }))}
               />
             )}
-            {step === 1 && (
+            {key === 'competitors' && (
               <Competitors
                 competitors={competitors}
                 onAdd={(name, website) => setCompetitors((list) => [...list, makeCompetitor(name, website, list.length)])}
                 onRemove={(name) => setCompetitors((list) => list.filter((c) => c.name !== name))}
               />
             )}
-            {step === 2 && (
-              <AiAnswers answers={before} competitors={competitors} result={monitorCopy.resultBefore} />
+            {key === 'testdata' && (
+              <TestData
+                productCount={sample?.rows.length ?? 0}
+                competitors={competitors}
+                generated={generated}
+                onGenerated={() => { setGenerated(true); setErrors((e) => ({ ...e, testdata: undefined })); }}
+                chosenIds={chosenIds}
+                onToggleModel={(id) => {
+                  setChosenIds((ids) => (ids.includes(id) ? ids.filter((x) => x !== id) : models.filter((m) => m.id === id || ids.includes(m.id)).map((m) => m.id)));
+                  setErrors((e) => ({ ...e, testdata: undefined }));
+                }}
+                error={errors.testdata}
+              />
             )}
-            {step === 3 && <Analyze />}
-            {step === 4 && <Investigate sample={sample} usingSample={file?.isSample} />}
-            {step === 5 && <Optimize approved={approved} onApprove={() => setApproved(true)} />}
-            {step === 6 && (
-              <AiAnswers answers={after} competitors={competitors} result={retestCopy.result} after />
+            {key === 'monitor' && (
+              <AiAnswers answers={before} competitors={competitors} result={monitorCopy.resultBefore(chosen.length)} />
+            )}
+            {key === 'analyze' && <Analyze rows={analyzeRows(chosen)} />}
+            {key === 'investigate' && <Investigate sample={sample} usingSample={file?.isSample} />}
+            {key === 'optimize' && <Optimize approved={approved} onApprove={() => setApproved(true)} />}
+            {key === 'retest' && (
+              <AiAnswers answers={after} competitors={competitors} result={retestCopy.result(chosen.length)} after />
             )}
 
             <DemoNav

@@ -1,9 +1,10 @@
 import { question, monitorCopy, scoreboard } from '../../lib/demoData.js';
 import './AiAnswers.css';
 
-// Steps 3 (Monitor) and 7 (Re-test): three simulated AI answers plus a "recommended in" scoreboard.
+// Monitor and Re-test steps: one simulated answer per chosen AI model, plus a "recommended in" scoreboard.
 export default function AiAnswers({ answers, competitors, result, after = false }) {
   const scores = scoreboard(competitors, answers);
+  const total = answers.length;
   return (
     <div className="answers">
       <div className="answers__question">
@@ -15,10 +16,10 @@ export default function AiAnswers({ answers, competitors, result, after = false 
 
       <div className="answers__grid">
         {answers.map((a) => (
-          <article key={a.assistant} className="answers__card" aria-label={a.assistant}>
+          <article key={a.model.id} className="answers__card" aria-label={a.model.name}>
             <header className="answers__head">
-              <span className="answers__avatar" aria-hidden="true">{a.assistant.slice(-1)}</span>
-              <h3>{a.assistant}</h3>
+              <span className="answers__avatar" aria-hidden="true">{a.model.name[0]}</span>
+              <h3>{a.model.name}</h3>
               <span className="badge badge--warning">Simulated</span>
             </header>
             <p className="answers__intro">{monitorCopy.intro}</p>
@@ -31,6 +32,7 @@ export default function AiAnswers({ answers, competitors, result, after = false 
               ))}
             </ol>
             {a.note && <p className="answers__note">{a.note}</p>}
+            <p className="answers__sim">{monitorCopy.simulatedNote(a.model.name)}</p>
           </article>
         ))}
       </div>
@@ -42,9 +44,9 @@ export default function AiAnswers({ answers, competitors, result, after = false 
             <li key={s.brand} className={s.isClient ? 'answers__bar answers__bar--client' : 'answers__bar'}>
               <span className="answers__bar-name">{s.brand}</span>
               <span className="answers__bar-track" aria-hidden="true">
-                <span style={{ width: `${(s.count / 3) * 100}%` }} />
+                <span style={{ width: `${(s.count / total) * 100}%` }} />
               </span>
-              <span className="answers__bar-count">{s.count} {monitorCopy.scoreOf}</span>
+              <span className="answers__bar-count">{s.count} {monitorCopy.scoreOf(total)}</span>
             </li>
           ))}
         </ul>

@@ -1,8 +1,8 @@
 import { analyzeCopy } from '../../lib/demoData.js';
 import './Analyze.css';
 
-// Step 4: compare what AI said against Niek's verified product data.
-export default function Analyze() {
+// Analyze step: compare what AI said against Niek's verified product data.
+export default function Analyze({ rows }) {
   return (
     <div className="analyze">
       <p className="analyze__lead">{analyzeCopy.lead}</p>
@@ -13,9 +13,9 @@ export default function Analyze() {
             <tr>{analyzeCopy.columns.map((c) => <th key={c} scope="col">{c}</th>)}</tr>
           </thead>
           <tbody>
-            {analyzeCopy.rows.map((r) => (
-              <tr key={r.assistant}>
-                <th scope="row">{r.assistant}</th>
+            {rows.map((r) => (
+              <tr key={r.model}>
+                <th scope="row">{r.model}</th>
                 <td>{r.said}</td>
                 <td>{r.verified}</td>
                 <td><span className={`badge badge--${r.tone}`}>{r.result}</span></td>
