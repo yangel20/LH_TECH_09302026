@@ -28,6 +28,9 @@ export const problem = {
   ],
 };
 
+// Heading for the 4 steps on Home (CONTENT.md "How it works"). Not metrics.processLabel ("How we work").
+export const stepsTitle = 'How it works';
+
 export const steps = [
   {
     title: 'Monitor',

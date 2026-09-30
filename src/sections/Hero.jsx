@@ -11,7 +11,7 @@ export default function Hero() {
           <h1 id="hero-title" className="hero__title">{company.slogan}</h1>
           <p className="hero__description">{company.description}</p>
           <div className="hero__actions">
-            <Link className="btn" to={heroButtons.primary.href} onClick={() => document.getElementById('how-it-works')?.scrollIntoView()}>{heroButtons.primary.label}<span aria-hidden="true"> ↗</span></Link>
+            <Link className="btn" to={heroButtons.primary.href} onClick={() => document.getElementById('how-it-works')?.scrollIntoView()}>{heroButtons.primary.label}<span aria-hidden="true"> ↓</span></Link>
             <Link className="btn btn--ghost" to={heroButtons.secondary.to}>{heroButtons.secondary.label}</Link>
           </div>
         </div>

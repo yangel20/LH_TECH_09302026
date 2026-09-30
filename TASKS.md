@@ -13,9 +13,9 @@ Owners: Claude (lead), Codex, Human
 | # | Task | Owner | Files | Status |
 |---|------|-------|-------|--------|
 | 2b | Company setup: brand tokens, logo nav, routes, company.js, Avatar, footer, placeholders | Claude | tokens.css, App.jsx, main.jsx, index.html, src/components/*, src/lib/company.js | DONE |
-| 3 | Home sections: Hero (slogan, description, 2 buttons, the problem + 2 risks), How it works (4 steps + "What makes us different", keep `id="how-it-works"`), Metrics (20% headline WITH the goals label), Testimonials (3 quotes + disclaimer line, always), Call to action | Codex (hero) | src/sections/Hero.jsx+.css, Features.jsx+.css, Metrics.jsx+.css, Testimonials.jsx+.css, CallToAction.jsx+.css | IN PROGRESS |
-| 4 | Mission page: Mission, Vision, Values (4), Metrics: goals under "Our 90-day goals for every client" + "How we work" process facts | Codex (mission) | src/pages/Mission.jsx, Mission.css | TODO |
-| 6 | About Us page: Our story, "Meet the founders" grid (5, use `<Avatar>`), "How we keep AI answers honest" (6 items), `<CallToAction />` at the bottom | Codex (about) | src/pages/About.jsx, About.css | TODO |
+| 3 | Home sections: Hero (slogan, description, 2 buttons, the problem + 2 risks), How it works (4 steps + "What makes us different", keep `id="how-it-works"`), Metrics (20% headline WITH the goals label), Testimonials (3 quotes + disclaimer line, always), Call to action | Codex (hero) | src/sections/Hero.jsx+.css, Features.jsx+.css, Metrics.jsx+.css, Testimonials.jsx+.css, CallToAction.jsx+.css | REVIEW |
+| 4 | Mission page: Mission, Vision, Values (4), Metrics: goals under "Our 90-day goals for every client" + "How we work" process facts | Codex (mission) | src/pages/Mission.jsx, Mission.css | DONE |
+| 6 | About Us page: Our story, "Meet the founders" grid (5, use `<Avatar>`), "How we keep AI answers honest" (6 items), `<CallToAction />` at the bottom | Codex (about) | src/pages/About.jsx, About.css | DONE |
 
 ## Phase 3 — Review & polish
 | # | Task | Owner | Files | Status |

@@ -1,1 +1,177 @@
-/* Owner: Codex (task #4) */
+/* Owner: Codex (task #4). All colors follow the shared light/dark tokens. */
+.mission__purpose {
+  background: var(--color-primary-soft);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.mission__purpose-grid {
+  display: grid;
+  gap: var(--space-5);
+  align-items: center;
+}
+
+.mission__title {
+  color: var(--color-primary);
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-4);
+}
+
+.mission__lead {
+  font-size: var(--text-xl);
+  line-height: 1.4;
+  font-weight: 600;
+  max-width: 32ch;
+  margin: 0;
+}
+
+.mission__vision {
+  border-top: var(--space-1) solid var(--color-accent);
+  padding: var(--space-4);
+}
+
+.mission__vision h2,
+.mission__heading {
+  font-size: var(--text-xl);
+}
+
+.mission__vision p {
+  font-size: var(--text-lg);
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.mission__heading {
+  margin-bottom: var(--space-4);
+}
+
+.mission__values-grid,
+.mission__goals-grid,
+.mission__process-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.mission__value-mark {
+  display: block;
+  width: var(--space-5);
+  height: var(--space-1);
+  background: var(--color-accent);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-4);
+}
+
+.mission__value h3 {
+  font-size: var(--text-lg);
+}
+
+.mission__value p,
+.mission__goal p,
+.mission__fact p {
+  margin: 0;
+}
+
+.mission__value p,
+.mission__fact p:not(.mission__number) {
+  color: var(--color-text-muted);
+}
+
+.mission__metrics {
+  padding-top: 0;
+}
+
+.mission__goals {
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--color-primary-soft);
+  border: 1px solid var(--color-border);
+}
+
+.mission__goals-label {
+  color: var(--color-primary);
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-4);
+}
+
+.mission__headline {
+  display: grid;
+  gap: var(--space-3);
+  padding-bottom: var(--space-4);
+}
+
+.mission__headline-number {
+  font-size: calc(var(--text-2xl) * 2);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.mission__headline-text {
+  font-size: var(--text-lg);
+  max-width: 38ch;
+  margin: 0;
+}
+
+.mission__goals-grid {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-4);
+  gap: var(--space-4);
+}
+
+.mission__number {
+  color: var(--color-primary);
+  font-size: var(--text-2xl);
+  line-height: 1.2;
+  font-weight: 750;
+  margin-bottom: var(--space-2) !important;
+}
+
+.mission__process {
+  margin-top: var(--space-5);
+}
+
+.mission__number--process {
+  font-size: var(--text-xl);
+  color: var(--color-accent-text);
+}
+
+@media (min-width: 640px) {
+  .mission__values-grid,
+  .mission__process-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mission__goals {
+    padding: var(--space-5);
+  }
+
+  .mission__headline {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: var(--space-5);
+  }
+
+  .mission__goals-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .mission__purpose-grid {
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--space-6);
+  }
+
+  .mission__vision {
+    padding: var(--space-5);
+  }
+
+  .mission__values-grid,
+  .mission__process-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
