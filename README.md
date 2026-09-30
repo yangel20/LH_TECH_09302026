@@ -3,19 +3,42 @@
 > **Live demo:** https://nexo-one-cyan.vercel.app, no install needed.
 
 ## What it does
-Shoppers increasingly ask AI assistants what to buy, so a brand that the AI leaves out, or
-describes wrongly, loses the customer before they ever reach its website. **Nexo** is a B2B
-Generative Engine Optimization (GEO) platform that works in four steps:
+Shoppers increasingly ask AI assistants what to buy. If the AI leaves a brand out, or describes
+its product wrongly, the brand loses the customer before they ever reach its website. **Nexo** is
+a B2B Generative Engine Optimization (GEO) platform for small, medium and large US brands:
 
-1. **Monitor**: asks AI assistants realistic shopping questions and tracks which products they recommend.
-2. **Analyze**: checks AI claims against the brand's verified product data.
-3. **Investigate**: traces each gap to its source (e.g. battery listed in watt-hours, not hours).
-4. **Optimize**: recommends fixes that a human approves, then re-tests to prove the fix worked.
+1. **Monitor**: ask AI assistants realistic shopper questions built from the brand's own product data.
+2. **Analyze**: check what the AI claims against the brand's verified product data.
+3. **Investigate**: trace each gap to the exact field that caused it (e.g. "sealed weather
+   membrane" but never "waterproof").
+4. **Optimize**: a consultant recommends fixes, the client approves them, and Nexo re-tests to
+   prove they worked.
 
-This repo is the Nexo website plus an **interactive demo**: a simulated audit of Niek, a fictional
-running brand, from product data to an AI visibility dashboard and a consultation booking.
-Everything in the demo is **simulated** (fictional brands, mock numbers, no AI models are called),
-so it runs with no API keys.
+## How Nexo is different
+Most AI-visibility tools stop at **counting mentions**. Nexo goes from "you're missing" to
+"here's why, here's the fix, and here's proof it worked":
+
+| Typical AI-visibility tracker | Nexo |
+|---|---|
+| Tracks whether the brand is mentioned | Also checks **whether what AI says is true**, against the brand's verified product data |
+| Reports a score | **Traces the root cause** to the exact product field or page |
+| Leaves the fix to the client | **Human-approved fixes** (analyst + consultant), then a **re-test** that proves the change worked |
+| Generic or hand-written prompts | **Synthetic shopper questions generated from the brand's own products and target customers**, by an open model we run ourselves (low cost, data stays private) |
+| Built for large marketing teams | Built so **small and local businesses** can compete too |
+
+## What's real vs simulated in this demo
+The demo shows the product flow end to end so judges can click through it in two minutes.
+It runs with **no API keys**, so AI answers and scores are **simulated** and clearly labeled.
+
+| Real (working in the browser) | Simulated (mock data, labeled) |
+|---|---|
+| Uploading and parsing your own CSV (read in the browser only, nothing is uploaded) | Question generation ("Nexo's internal AI") |
+| Form validation, competitor add/remove (1–8), AI model selection | AI answers and every dashboard number |
+| Dashboard recalculates for the competitors and models you chose; model tabs, hoverable chart, legend toggles | The consultation request (nothing is sent) |
+| Availability picker and confirmation | Niek and all competitors (fictional brands, `.example` sites) |
+
+The real product (accounts, database, AWS pipeline, real AI calls) is planned in
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) and [docs/WIREFRAMES.md](docs/WIREFRAMES.md).
 
 ## How to navigate it (judges start here)
 1. Open the **live demo** link above. The menu has four pages: **Home, Mission, About Us, Demo**.
@@ -81,10 +104,16 @@ run.sh          build + run + health check
 ```
 
 ## Roadmap
-Planning docs for the real product: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) (system design,
-data pipeline, storage, budget) and [docs/WIREFRAMES.md](docs/WIREFRAMES.md) (every screen).
+**Next for the demo** (make core pieces real, still no API keys):
+- Generate test questions from *your* uploaded CSV (target customer, features, price) instead of a fixed list.
+- "Analyze an AI answer": paste a real ChatGPT answer and get real mention, position and
+  wrong-claim detection against your product data.
+- A wrong-claims drill-down on the dashboard: AI claim → verified data → root-cause field → suggested fix.
 
-- Mini-CRM backend: client accounts, product catalogs, audit history and fix approvals.
+**The real product** ([architecture](docs/ARCHITECTURE.md) · [wireframes](docs/WIREFRAMES.md)):
+accounts and login → file upload + ETL → question generation (open model) → AI runs with
+caching and budget limits → scoring + dashboard → human-approved fixes and re-tests → scale
+(more AI tools, GPU, billing).
 
 ## Team (LH)
 | Name | Role |
