@@ -1,0 +1,57 @@
+.stepper { margin-bottom: var(--space-4); }
+.stepper__compact { margin: 0 0 var(--space-2); font-size: var(--text-sm); color: var(--color-text-muted); }
+.stepper__compact strong { color: var(--color-text); }
+.stepper__bar { height: 6px; border-radius: 999px; background: var(--color-primary-soft); overflow: hidden; }
+.stepper__bar span { display: block; height: 100%; background: var(--color-accent); transition: width 0.3s ease; }
+.stepper__list { display: none; }
+
+@media (min-width: 800px) {
+  .stepper__compact, .stepper__bar { display: none; }
+  .stepper__list {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: none;
+  }
+  .stepper__item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+  /* connector line between dots */
+  .stepper__item + .stepper__item::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    right: 50%;
+    width: 100%;
+    height: 2px;
+    background: var(--color-border);
+    z-index: 0;
+  }
+  .stepper__item--done + .stepper__item::before,
+  .stepper__item--done + .stepper__item--done::before { background: var(--color-accent); }
+  .stepper__dot {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-weight: 700;
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+  }
+  .stepper__item--done .stepper__dot { background: var(--color-accent-soft); border-color: var(--color-accent); color: var(--color-accent-text); }
+  .stepper__item--current { color: var(--color-primary); font-weight: 700; }
+  .stepper__item--current .stepper__dot { border-color: var(--color-primary); background: var(--color-primary); color: var(--color-on-primary); }
+}
+@media (prefers-reduced-motion: reduce) { .stepper__bar span { transition: none; } }
