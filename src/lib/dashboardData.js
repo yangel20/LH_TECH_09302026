@@ -41,7 +41,7 @@ export const dashboardCopy = {
 
 // Simulated brand profiles: coverage %, likelihood to buy %, sentiment, average position.
 const profiles = {
-  Niek: { coverage: 9, buy: 74, sentiment: 18, position: 4.6 },
+  Niek: { coverage: 9, buy: 34, sentiment: 18, position: 4.6 },
   'Altus Running': { coverage: 58, buy: 72, sentiment: 64, position: 1.8 },
   'Kova Athletics': { coverage: 41, buy: 58, sentiment: 57, position: 2.6 },
   'Ridgeline Gear': { coverage: 47, buy: 69, sentiment: 61, position: 2.2 },

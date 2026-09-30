@@ -7,23 +7,21 @@ export const demoCopy = {
   badge: 'Simulated',
   disclaimer: 'Niek is a fictional brand created for this demo. AI answers are simulated.',
   title: 'See a Nexo audit in action',
-  intro: 'Follow a simulated audit for Niek, a fictional running brand, from first question to verified fix.',
+  intro: 'Follow a simulated audit for Niek, a fictional running brand, from product data to an AI visibility report.',
   back: 'Back',
   steps: [
     { key: 'start', label: 'Start', title: 'Tell us about the brand', next: 'Next: Competitors' },
     { key: 'competitors', label: 'Competitors', title: 'Who do you compete with?', next: 'Next: Build test data' },
     { key: 'testdata', label: 'Test data', title: 'Build test data', next: 'Next: Run AI check' },
-    { key: 'dashboard', label: 'Dashboard', title: 'AI visibility dashboard', next: 'Next: Analyze answers' },
-    { key: 'analyze', label: 'Analyze', title: 'What AI got wrong', next: 'Next: Find the cause' },
-    { key: 'investigate', label: 'Investigate', title: 'Why it happened', next: 'Next: See the fix' },
-    { key: 'optimize', label: 'Optimize', title: 'Recommended fix', next: 'Next: Re-test' },
-    { key: 'retest', label: 'Re-test', title: 'After the fix', next: 'Start over' },
+    { key: 'dashboard', label: 'Dashboard', title: 'AI visibility dashboard', next: 'Next: Book a consultation' },
+    { key: 'consult', label: 'Consultation', title: 'Book your results consultation', next: 'Request consultation' },
   ],
 };
 
 // ---- Step 1: Start (form) ----
 export const formDefaults = {
   company: 'Niek',
+  email: 'marketing@niek.example',
   website: 'https://niek.example',
   location: 'Portland, OR',
   industry: 'Running shoes & apparel',
@@ -43,6 +41,7 @@ export const industries = [
 export const formCopy = {
   labels: {
     company: 'Company name',
+    email: 'Work email',
     website: 'Website',
     location: 'Location',
     industry: 'Industry',
@@ -69,36 +68,24 @@ export const competitorsCopy = {
   max: 8,
 };
 
-// product/price/blurb are simulated. mentions[i] = recommended by model i (in the models list order) before the fix.
+// product names are simulated (used in the comparison test prompt).
 export const knownCompetitors = [
-  { name: 'Altus Running', website: 'altus.example', product: 'Altus Ridge WP', price: 145, blurb: 'fully waterproof with a grippy trail outsole', mentions: [true, true, true, true, false] },
-  { name: 'Kova Athletics', website: 'kova.example', product: 'Kova Drift Waterproof', price: 98, blurb: 'a budget waterproof pick for daily runs', mentions: [true, false, true, false, true] },
-  { name: 'Ridgeline Gear', website: 'ridgeline.example', product: 'Ridgeline Torrent', price: 140, blurb: 'waterproof and built for rough, wet trails', mentions: [false, true, true, true, true] },
-  { name: 'Summit Stride', website: 'summitstride.example', product: 'Summit Stride Rainpeak', price: 130, blurb: 'a waterproof hiking-running hybrid', mentions: [false, true, false, true, false] },
-  { name: 'Cadence Co.', website: 'cadence.example', product: 'Cadence Storm Runner', price: 120, blurb: 'a waterproof road shoe for rainy commutes', mentions: [true, false, false, false, true] },
-  { name: 'Northpace', website: 'northpace.example', product: 'Northpace Sleet Trail', price: 149, blurb: 'waterproof and insulated for cold, wet runs', mentions: [false, false, true, true, false] },
-  { name: 'Tempo Trail', website: 'tempotrail.example', product: 'Tempo Trail Splash Racer', price: 125, blurb: 'a light, water-resistant racing option', mentions: [false, true, false, false, true] },
-  { name: 'Brisk Athletic', website: 'brisk.example', product: 'Brisk All-Weather Run', price: 85, blurb: 'an affordable all-weather everyday runner', mentions: [true, false, true, false, false] },
+  { name: 'Altus Running', website: 'altus.example', product: 'Altus Ridge WP' },
+  { name: 'Kova Athletics', website: 'kova.example', product: 'Kova Drift Waterproof' },
+  { name: 'Ridgeline Gear', website: 'ridgeline.example', product: 'Ridgeline Torrent' },
+  { name: 'Summit Stride', website: 'summitstride.example', product: 'Summit Stride Rainpeak' },
+  { name: 'Cadence Co.', website: 'cadence.example', product: 'Cadence Storm Runner' },
+  { name: 'Northpace', website: 'northpace.example', product: 'Northpace Sleet Trail' },
+  { name: 'Tempo Trail', website: 'tempotrail.example', product: 'Tempo Trail Splash Racer' },
+  { name: 'Brisk Athletic', website: 'brisk.example', product: 'Brisk All-Weather Run' },
 ];
 export const defaultCompetitorNames = ['Altus Running', 'Kova Athletics', 'Ridgeline Gear'];
 
 // A competitor typed in by the viewer gets simulated details too.
-export function makeCompetitor(name, website, index) {
+export function makeCompetitor(name, website) {
   const known = knownCompetitors.find((c) => c.name.toLowerCase() === name.trim().toLowerCase());
   if (known) return { ...known, website: website || known.website };
-  const patterns = [
-    [true, true, false, true, false],
-    [false, true, true, false, true],
-    [true, false, true, true, false],
-  ];
-  return {
-    name: name.trim(),
-    website: website.trim(),
-    product: `${name.trim()} Waterproof Runner`,
-    price: 129,
-    blurb: 'a waterproof running shoe',
-    mentions: patterns[index % patterns.length],
-  };
+  return { name: name.trim(), website: website.trim(), product: `${name.trim()} Waterproof Runner` };
 }
 
 // ---- Step 3: Test data (synthetic prompts + model choice) ----
@@ -147,122 +134,41 @@ export function buildPrompts(competitors) {
   ];
 }
 
-// ---- Step 8: Re-test (answer cards). Step 4 is the dashboard: see dashboardData.js ----
-export const niekProduct = {
-  brand: 'Niek',
-  sku: 'NK-101',
-  product: 'Niek Stormline Trail',
-  price: 135,
-  blurbAfter: 'a waterproof trail runner with grippy lugs for wet, muddy terrain',
+export const niekProduct = { brand: 'Niek', sku: 'NK-101', product: 'Niek Stormline Trail' };
+
+// ---- Step 5: Consultation (the end of the demo for now) ----
+export const consultCopy = {
+  text: 'A Nexo data analyst and consultant will walk you through these results, explain what AI gets wrong about your brand, suggest how to improve your product information, and re-run the test.',
+  team: [
+    { role: 'Data analyst', does: 'Explains every number in your report and what drives it.' },
+    { role: 'Consultant', does: 'Recommends the fixes to make first and plans your re-test.' },
+  ],
+  availabilityTitle: 'When are you available?',
+  availabilityText: 'Pick every time that works (Pacific Time). We will confirm one.',
+  times: ['9:00 AM', '11:00 AM', '1:00 PM', '3:00 PM'],
+  formatTitle: 'Meeting format',
+  formats: ['Video call', 'Phone call'],
+  notesLabel: 'Anything we should know?',
+  optional: 'optional',
+  pickError: 'Choose at least one time that works for you.',
+  sentTitle: 'Request received',
+  sentText: (email) => `Thanks! In a real engagement we would email ${email} to confirm a time with our data analyst and consultant.`,
+  sentNote: 'Simulated: nothing was sent.',
+  startOver: 'Start over',
 };
 
-const answers = (n) => `${n} ${n === 1 ? 'answer' : 'answers'}`;
-
-export const monitorCopy = {
-  questionLabel: 'Headline prompt',
-  scoreTitle: 'Recommended in',
-  scoreOf: (n) => `of ${answers(n)}`,
-  resultBefore: (n) => `Niek is recommended in 0 of ${answers(n)}. Competitors are recommended instead.`,
-  wrongClaim: 'Note: the Niek Stormline Trail is not waterproof, so it does not fit this request.',
-  intro: 'Here are strong waterproof running shoes under $150:',
-  simulatedNote: (model) => `Simulated response, not real output from ${model}.`,
-};
-
-// The model that makes the wrong "not waterproof" claim: the 2nd chosen model (or the only one).
-export const wrongClaimIndex = (chosen) => (chosen.length > 1 ? 1 : 0);
-
-// Build one simulated answer per chosen model from the viewer's competitor list.
-// after = true puts Niek first in every answer (the re-test).
-export function buildAnswers(competitors, chosen, { after = false } = {}) {
-  return chosen.map((model, i) => {
-    const slot = models.findIndex((m) => m.id === model.id);
-    let picks = competitors.filter((c) => c.mentions[slot]);
-    if (picks.length === 0) picks = competitors.slice(0, 1);
-    const items = picks.slice(0, after ? 2 : 3).map((c) => ({
-      brand: c.name,
-      product: c.product,
-      price: c.price,
-      blurb: c.blurb,
-    }));
-    if (after) {
-      items.unshift({ brand: niekProduct.brand, product: niekProduct.product, price: niekProduct.price, blurb: niekProduct.blurbAfter, isClient: true });
+// Next 5 weekdays from today, for the availability grid.
+export function nextWeekdays(count = 5, from = new Date()) {
+  const days = [];
+  const d = new Date(from);
+  while (days.length < count) {
+    d.setDate(d.getDate() + 1);
+    if (d.getDay() !== 0 && d.getDay() !== 6) {
+      days.push({
+        key: d.toISOString().slice(0, 10),
+        label: d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }),
+      });
     }
-    const note = !after && i === wrongClaimIndex(chosen) ? monitorCopy.wrongClaim : null;
-    return { model, items, note };
-  });
+  }
+  return days;
 }
-
-export function scoreboard(competitors, results) {
-  const count = (brand) => results.filter((a) => a.items.some((it) => it.brand === brand)).length;
-  return [
-    { brand: niekProduct.brand, count: count(niekProduct.brand), isClient: true },
-    ...competitors.map((c) => ({ brand: c.name, count: count(c.name) })),
-  ];
-}
-
-// ---- Step 5: Analyze ----
-export const analyzeCopy = {
-  lead: 'Niek Stormline Trail ($135) meets the question: waterproof, under $150.',
-  tableCaption: "Simulated AI answers checked against Niek's verified product data",
-  columns: ['AI model', 'What AI said about Niek', 'Verified data', 'Result'],
-  notMentioned: 'Not mentioned',
-  wrongSaid: '"Is not waterproof"',
-  verified: 'Waterproof, $135',
-  missing: 'Missing',
-  inaccurate: 'Inaccurate',
-  risksTitle: 'Risks found',
-  risks: [
-    { title: 'Lost visibility', text: 'not mentioned' },
-    { title: 'Brand damage', text: 'wrong claim' },
-  ],
-};
-
-export function analyzeRows(chosen) {
-  const wrong = wrongClaimIndex(chosen);
-  return chosen.map((m, i) => ({
-    model: m.name,
-    said: i === wrong ? analyzeCopy.wrongSaid : analyzeCopy.notMentioned,
-    verified: analyzeCopy.verified,
-    result: i === wrong ? analyzeCopy.inaccurate : analyzeCopy.missing,
-    tone: i === wrong ? 'danger' : 'warning',
-  }));
-}
-
-// ---- Step 6: Investigate ----
-export const investigateCopy = {
-  lead: 'Root cause: the product page and feed say "sealed weather membrane" but never use the word "waterproof", and the feed\'s waterproof field is empty.',
-  rowLabel: 'Niek product data (from the CSV)',
-  sampleNote: "This audit uses Niek's sample data.",
-  highlightPhrase: 'sealed weather membrane',
-  emptyField: 'waterproof',
-  emptyLabel: '(empty)',
-};
-
-// ---- Step 7: Optimize ----
-export const optimizeCopy = {
-  changesTitle: 'Recommended changes',
-  changes: [
-    {
-      where: 'Product page',
-      what: 'add "Waterproof" to the title and short description.',
-      before: 'Niek Stormline Trail: Trail runner with a sealed weather membrane for wet, muddy terrain.',
-      after: 'Niek Stormline Trail Waterproof: Waterproof trail runner with a sealed weather membrane for wet, muddy terrain.',
-    },
-    {
-      where: 'Product feed',
-      what: 'set waterproof = yes and list "Waterproof" first in important features.',
-      before: 'waterproof: (empty) · important_features: Sealed weather membrane; 5 mm grippy lugs; Rock plate; Reflective heel',
-      after: 'waterproof: yes · important_features: Waterproof (sealed weather membrane); 5 mm grippy lugs; Rock plate; Reflective heel',
-    },
-  ],
-  beforeLabel: 'Before',
-  afterLabel: 'After',
-  approvalNote: 'Every change is approved by the client before it goes live.',
-  approve: 'Approve fix',
-  approved: 'Fix approved',
-};
-
-// ---- Step 8: Re-test ----
-export const retestCopy = {
-  result: (n) => `Same question, ${n} AI ${n === 1 ? 'model' : 'models'}: Niek Stormline Trail is now recommended in ${n} of ${answers(n)}, described as waterproof.`,
-};

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   demoCopy, formDefaults, formCopy, competitorsCopy, knownCompetitors, defaultCompetitorNames,
-  makeCompetitor, buildAnswers, retestCopy, models, testDataCopy, analyzeRows,
+  makeCompetitor, models, testDataCopy, consultCopy, nextWeekdays,
 } from '../lib/demoData.js';
 import { parseCsv } from '../lib/csv.js';
 import DemoStepper from './demo/DemoStepper.jsx';
@@ -10,19 +10,18 @@ import StartForm from './demo/StartForm.jsx';
 import Competitors from './demo/Competitors.jsx';
 import TestData from './demo/TestData.jsx';
 import Dashboard from './demo/Dashboard.jsx';
-import AiAnswers from './demo/AiAnswers.jsx';
-import Analyze from './demo/Analyze.jsx';
-import Investigate from './demo/Investigate.jsx';
-import Optimize from './demo/Optimize.jsx';
+import Consultation from './demo/Consultation.jsx';
 import './Demo.css';
 
 // Owner: Claude (task #5). A simulated Nexo audit for the fictional brand Niek. Nothing is sent anywhere.
 const initialCompetitors = () =>
   defaultCompetitorNames.map((name) => knownCompetitors.find((c) => c.name === name));
+const allModelIds = () => models.map((m) => m.id);
 
 function validateForm(form, file) {
   const errors = {};
   if (!form.company.trim()) errors.company = 'Enter a company name.';
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) errors.email = 'Enter a valid email, like name@company.com.';
   try {
     const url = new URL(form.website.trim());
     if (!/^https?:$/.test(url.protocol)) throw new Error();
@@ -42,9 +41,13 @@ export default function Demo() {
   const [sample, setSample] = useState(null);
   const [file, setFile] = useState(null);
   const [competitors, setCompetitors] = useState(initialCompetitors);
-  const [approved, setApproved] = useState(false);
   const [generated, setGenerated] = useState(false);
-  const [chosenIds, setChosenIds] = useState(() => models.map((m) => m.id));
+  const [chosenIds, setChosenIds] = useState(allModelIds);
+  const [slots, setSlots] = useState([]);
+  const [format, setFormat] = useState(consultCopy.formats[0]);
+  const [notes, setNotes] = useState('');
+  const [sent, setSent] = useState(false);
+  const days = useMemo(() => nextWeekdays(), []);
   const headingRef = useRef(null);
   const topRef = useRef(null);
   const firstRender = useRef(true);
@@ -66,13 +69,17 @@ export default function Demo() {
     if (firstRender.current) { firstRender.current = false; return; }
     topRef.current?.scrollIntoView({ block: 'start' });
     headingRef.current?.focus({ preventScroll: true });
-  }, [step]);
+  }, [step, sent]);
 
   const chosen = useMemo(() => models.filter((m) => chosenIds.includes(m.id)), [chosenIds]);
-  const after = useMemo(() => buildAnswers(competitors, chosen, { after: true }), [competitors, chosen]);
   const current = demoCopy.steps[step];
   const key = current.key;
-  const isLast = step === demoCopy.steps.length - 1;
+
+  function reset() {
+    setStep(0); setForm(formDefaults); setFile(sample); setErrors({});
+    setCompetitors(initialCompetitors()); setGenerated(false); setChosenIds(allModelIds());
+    setSlots([]); setFormat(consultCopy.formats[0]); setNotes(''); setSent(false);
+  }
 
   function next() {
     if (key === 'start') {
@@ -85,17 +92,16 @@ export default function Demo() {
       setErrors((e) => ({ ...e, testdata: msg || undefined }));
       if (msg) return;
     }
-    if (isLast) {
-      setStep(0); setForm(formDefaults); setFile(sample); setErrors({});
-      setCompetitors(initialCompetitors()); setApproved(false);
-      setGenerated(false); setChosenIds(models.map((m) => m.id));
-      return;
+    if (key === 'consult') {
+      if (sent) return reset();
+      if (!slots.length) return setErrors((e) => ({ ...e, consult: consultCopy.pickError }));
+      return setSent(true);
     }
     setStep((s) => s + 1);
   }
 
-  const nextDisabled =
-    (key === 'competitors' && competitors.length < competitorsCopy.min) || (key === 'optimize' && !approved);
+  const nextDisabled = key === 'competitors' && competitors.length < competitorsCopy.min;
+  const nextLabel = key === 'consult' && sent ? consultCopy.startOver : current.next;
 
   return (
     <div className="demo">
@@ -128,7 +134,7 @@ export default function Demo() {
             {key === 'competitors' && (
               <Competitors
                 competitors={competitors}
-                onAdd={(name, website) => setCompetitors((list) => [...list, makeCompetitor(name, website, list.length)])}
+                onAdd={(name, website) => setCompetitors((list) => [...list, makeCompetitor(name, website)])}
                 onRemove={(name) => setCompetitors((list) => list.filter((c) => c.name !== name))}
               />
             )}
@@ -147,17 +153,28 @@ export default function Demo() {
               />
             )}
             {key === 'dashboard' && <Dashboard competitors={competitors} chosen={chosen} />}
-            {key === 'analyze' && <Analyze rows={analyzeRows(chosen)} />}
-            {key === 'investigate' && <Investigate sample={sample} usingSample={file?.isSample} />}
-            {key === 'optimize' && <Optimize approved={approved} onApprove={() => setApproved(true)} />}
-            {key === 'retest' && (
-              <AiAnswers answers={after} competitors={competitors} result={retestCopy.result(chosen.length)} after />
+            {key === 'consult' && (
+              <Consultation
+                days={days}
+                slots={slots}
+                onToggle={(id) => {
+                  setSlots((s) => (s.includes(id) ? s.filter((x) => x !== id) : [...s, id]));
+                  setErrors((e) => ({ ...e, consult: undefined }));
+                }}
+                format={format}
+                onFormat={setFormat}
+                notes={notes}
+                onNotes={setNotes}
+                sent={sent}
+                email={form.email}
+                error={errors.consult}
+              />
             )}
 
             <DemoNav
-              showBack={step > 0}
+              showBack={step > 0 && !sent}
               backLabel={demoCopy.back}
-              nextLabel={current.next}
+              nextLabel={nextLabel}
               onBack={() => setStep((s) => s - 1)}
               onNext={next}
               nextDisabled={nextDisabled}

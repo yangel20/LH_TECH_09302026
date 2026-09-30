@@ -154,17 +154,20 @@ IMPORTANT: everything on this page is simulated. Always show the "Simulated" lab
 Brands and websites are fictional. Real AI model names (ChatGPT, Gemini, Claude, Perplexity, Copilot)
 are shown for illustration only (Yangel's decision, 2026-09-30); no model is called, and every answer
 card says "Simulated response, not real output from <model>."
-Every step has a "Next" button; steps 2-8 also have "Back".
+Every step has a "Next" button; steps 2-5 also have "Back". The demo has 5 steps (2026-09-30):
+Start, Competitors, Test data, Dashboard, Consultation. The old Analyze / Investigate /
+Optimize / Re-test steps were removed (Yangel's decision).
 Small UI labels (Back, Remove, Before/After, table headers) and the simulated AI answers,
 competitor products and prices live in src/lib/demoData.js (all fictional).
 
 ## Intro
 Title: "See a Nexo audit in action"
-Text: "Follow a simulated audit for Niek, a fictional running brand, from first question to verified fix."
+Text: "Follow a simulated audit for Niek, a fictional running brand, from product data to an AI visibility report."
 
 ## Step 1: Start (form, pre-filled)
 Title: "Tell us about the brand"
 - Company name: Niek
+- Work email: marketing@niek.example
 - Website: https://niek.example
 - Location: Portland, OR
 - Industry: Running shoes & apparel
@@ -211,33 +214,20 @@ competitors), Your average position (lower is better), Sentiment ("1 inaccurate 
 Panels: Brand coverage over time (Niek + up to 5 competitors, 14 days), Brand ranking
 (sentiment, mentions, coverage, share of voice), Niek in the test prompts (10 of 100, each
 Mentioned / Not mentioned / Mentioned · inaccurate), Brand visibility index (coverage vs
-likelihood to buy: Leaders, Niche, Low conversion, Low performance)
+likelihood to buy: Leaders, Niche, Low conversion, Low performance). Niek: 8.6% coverage,
+34% likelihood to buy = Low performance.
 All numbers are simulated and follow the competitors and models chosen earlier.
-Button: "Next: Analyze answers"
+Button: "Next: Book a consultation"
 
-## Step 5: Analyze
-Title: "What AI got wrong"
-Niek Stormline Trail ($135) meets the question: waterproof, under $150.
-The second chosen model also claims it "is not waterproof": inaccurate.
-Risks found: Lost visibility (not mentioned) and Brand damage (wrong claim).
-Button: "Next: Find the cause"
-
-## Step 6: Investigate
-Title: "Why it happened"
-Root cause: the product page and feed say "sealed weather membrane" but never use the word
-"waterproof", and the feed's waterproof field is empty.
-Button: "Next: See the fix"
-
-## Step 7: Optimize
-Title: "Recommended fix"
-Recommended changes:
-- Product page: add "Waterproof" to the title and short description.
-- Product feed: set waterproof = yes and list "Waterproof" first in important features.
-"Every change is approved by the client before it goes live."
-Button: "Approve fix" (required), then "Next: Re-test"
-
-## Step 8: Re-test
-Title: "After the fix"
-Same question, all chosen models: Niek Stormline Trail is now recommended in 5 of 5 answers
-(count = models chosen), described as waterproof.
-Button: "Start over"
+## Step 5: Consultation (end of the demo for now)
+Title: "Book your results consultation"
+Text: "A Nexo data analyst and consultant will walk you through these results, explain what AI gets
+wrong about your brand, suggest how to improve your product information, and re-run the test."
+Team: Data analyst ("Explains every number in your report and what drives it."),
+      Consultant ("Recommends the fixes to make first and plans your re-test.")
+Availability: "When are you available?" · "Pick every time that works (Pacific Time). We will confirm one."
+  Grid: next 5 weekdays × 9:00 AM, 11:00 AM, 1:00 PM, 3:00 PM (pick at least one)
+Meeting format: Video call / Phone call · Notes: "Anything we should know?" (optional)
+Button: "Request consultation"
+Confirmation: "Request received" · "Thanks! In a real engagement we would email <email> to confirm a
+time with our data analyst and consultant." · "Simulated: nothing was sent." · Button: "Start over"

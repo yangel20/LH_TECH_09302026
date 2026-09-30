@@ -15,7 +15,7 @@ Owners: Claude (lead), Codex, Human
 | 2b | Company setup: brand tokens, logo nav, routes, company.js, Avatar, footer, placeholders | Claude | tokens.css, App.jsx, main.jsx, index.html, src/components/*, src/lib/company.js | DONE |
 | 3 | Home sections: Hero (slogan, description, 2 buttons, the problem + 2 risks), How it works (4 steps + "What makes us different", keep `id="how-it-works"`), Metrics (20% headline WITH the goals label), Testimonials (3 quotes + disclaimer line, always), Call to action | Codex (hero) | src/sections/Hero.jsx+.css, Features.jsx+.css, Metrics.jsx+.css, Testimonials.jsx+.css, CallToAction.jsx+.css | DONE |
 | 4 | Mission page: Mission, Vision, Values (4), Metrics: goals under "Our 90-day goals for every client" + "How we work" process facts | Codex (mission) | src/pages/Mission.jsx, Mission.css | DONE |
-| 5 | Demo: 7-step simulated audit for fictional brand Niek (form, competitors, monitor, analyze, investigate, optimize, re-test) | Claude | src/pages/Demo.jsx+.css, src/pages/demo/*, src/lib/demoData.js, src/lib/csv.js, public/demo/ | DONE |
+| 5 | Demo: 5-step simulated audit for fictional brand Niek (form + email, competitors, test data, dashboard, consultation booking) | Claude | src/pages/Demo.jsx+.css, src/pages/demo/*, src/lib/demoData.js, src/lib/csv.js, public/demo/ | DONE |
 | 6 | About Us page: Our story, "Meet the founders" grid (5, use `<Avatar>`), "How we keep AI answers honest" (6 items), `<CallToAction />` at the bottom | Codex (about) | src/pages/About.jsx, About.css | DONE |
 
 ## Phase 3 — Review & polish

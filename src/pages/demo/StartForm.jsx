@@ -25,6 +25,7 @@ export default function StartForm({ form, errors, file, sample, onChange, onFile
     <form className="start-form" noValidate onSubmit={(e) => e.preventDefault()}>
       <div className="start-form__grid">
         {field('company', 'text', { autoComplete: 'organization' })}
+        {field('email', 'email', { autoComplete: 'email', inputMode: 'email' })}
         {field('website', 'url', { autoComplete: 'url', inputMode: 'url' })}
         {field('location', 'text', { autoComplete: 'address-level2' })}
         <div className="start-form__field">

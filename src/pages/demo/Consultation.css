@@ -1,0 +1,41 @@
+.consult__text { margin: 0 0 var(--space-4); color: var(--color-text-muted); max-width: 65ch; }
+.consult__team { list-style: none; margin: 0 0 var(--space-5); padding: 0; display: grid; gap: var(--space-3); }
+.consult__member { display: flex; gap: var(--space-3); align-items: flex-start; padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-bg); font-size: var(--text-sm); }
+.consult__icon { display: grid; place-items: center; flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--color-primary); color: var(--color-on-primary); font-weight: 700; }
+.consult__group { border: 0; padding: 0; margin: 0 0 var(--space-5); min-width: 0; }
+.consult__group legend { padding: 0; font-weight: 700; font-size: var(--text-lg); margin-bottom: var(--space-1); }
+.consult__help { margin: 0 0 var(--space-3); font-size: var(--text-sm); color: var(--color-text-muted); }
+.consult__grid-wrap { overflow-x: auto; }
+.consult__grid { border-collapse: separate; border-spacing: 6px; font-size: var(--text-sm); }
+.consult__grid th { font-weight: 600; white-space: nowrap; text-align: center; padding: 0 var(--space-1); }
+.consult__grid tbody th { text-align: right; color: var(--color-text-muted); font-weight: 500; }
+.consult__slot {
+  width: 100%; min-width: 64px; height: 40px; font: inherit; font-weight: 700; cursor: pointer;
+  border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-bg); color: var(--color-on-primary);
+}
+.consult__slot:hover { border-color: var(--color-primary); }
+.consult__slot--on { background: var(--color-primary); border-color: var(--color-primary); }
+.consult__error { margin: var(--space-2) 0 0; color: var(--color-danger); font-size: var(--text-sm); }
+.consult__formats { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.consult__format {
+  display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; padding: 0 var(--space-4);
+  border: 2px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer; background: var(--color-bg);
+}
+.consult__format--on { border-color: var(--color-primary); background: var(--color-primary-soft); font-weight: 600; }
+.consult__format input { accent-color: var(--color-primary); }
+.consult__format:has(input:focus-visible) { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+.consult__notes { display: flex; flex-direction: column; gap: var(--space-1); }
+.consult__notes label { font-weight: 600; font-size: var(--text-sm); }
+.consult__optional { font-weight: 400; color: var(--color-text-muted); }
+.consult__notes textarea {
+  font: inherit; color: var(--color-text); background: var(--color-bg); resize: vertical;
+  border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: var(--space-2) var(--space-3);
+}
+.consult--sent { text-align: center; padding: var(--space-4) 0; }
+.consult__check { margin: 0 auto var(--space-3); width: 56px; height: 56px; display: grid; place-items: center; border-radius: 50%; background: var(--color-accent-soft); color: var(--color-accent-text); font-size: 1.75rem; font-weight: 700; }
+.consult__sent-title { font-size: var(--text-xl); }
+.consult--sent > p { max-width: 55ch; margin-inline: auto; }
+.consult__picked { list-style: none; padding: 0; margin: var(--space-3) auto; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2); }
+.consult__picked li { padding: 2px var(--space-2); border-radius: 999px; background: var(--color-primary-soft); color: var(--color-primary); font-size: var(--text-sm); font-weight: 600; }
+.consult__sim { font-size: var(--text-sm); color: var(--color-text-muted); }
+@media (min-width: 640px) { .consult__team { grid-template-columns: 1fr 1fr; } }
