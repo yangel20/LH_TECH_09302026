@@ -30,5 +30,5 @@ Owners: Claude (lead), Codex, Human
 - Mini-CRM backend: clients, products, audits, approvals (Vercel Functions + a database)
 
 ## Requests (need a change in a file you don't own)
-- Human (business): team email for the "Contact us" button (CONTENT.md [TODO: team email]) → Lead sets `cta.email` in src/lib/company.js
+- Human (business): real team email for "Contact us" (placeholder contact@nexo.example in use) → Lead sets `cta.email` in src/lib/company.js
 - Human (business): optional one-line founder bios → Lead sets `bio` in src/lib/company.js

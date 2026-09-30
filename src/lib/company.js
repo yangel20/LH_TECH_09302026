@@ -143,12 +143,13 @@ export const testimonials = {
   ],
 };
 
-// email: null until the business team provides it (CONTENT.md [TODO: team email]).
+// Placeholder address chosen by Yangel: the reserved .example domain can never reach a real inbox.
+// Swap in a real team inbox when there is one.
 export const cta = {
   heading: 'Is AI recommending your business?',
   text: "Let's find out, and make sure it gets your story right.",
   button: 'Contact us',
-  email: null,
+  email: 'contact@nexo.example',
 };
 
 // Demo page (built later). Fictional example only; the demo must be labeled "Simulated".
