@@ -1,1 +1,9 @@
-/* Owner: Codex (task #3) */
+ .testimonials__grid { display: grid; gap: var(--space-4); }
+.testimonials__quote { margin: 0; display: flex; flex-direction: column; }
+.testimonials__mark { color: var(--color-accent-text); font-size: 4rem; line-height: 1; height: var(--space-5); font-family: Georgia, serif; }
+.testimonials__quote blockquote { margin: var(--space-3) 0 var(--space-5); line-height: 1.7; flex: 1; }
+.testimonials__author { border-top: 1px solid var(--color-border); padding-top: var(--space-3); }
+.testimonials__author strong, .testimonials__author span { display: block; }
+.testimonials__author span { color: var(--color-text-muted); font-size: var(--text-sm); margin-top: var(--space-1); }
+.testimonials__disclaimer { color: var(--color-text-muted); margin: var(--space-4) 0 0; max-width: 85ch; }
+@media (min-width: 900px) { .testimonials__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }

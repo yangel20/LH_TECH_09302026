@@ -1,18 +1,23 @@
 import { testimonials } from '../lib/company.js';
 import './Testimonials.css';
 
-// PLACEHOLDER. Owner: Codex (task #3). The disclaimer line must always be shown under the quotes.
 export default function Testimonials() {
   return (
-    <section className="testimonials section">
+    <section className="testimonials section" aria-describedby="testimonials-disclaimer">
       <div className="container">
-        {testimonials.items.map((t) => (
-          <figure key={t.name}>
-            <blockquote>“{t.quote}”</blockquote>
-            <figcaption><strong>{t.name}</strong>, {t.role}</figcaption>
-          </figure>
-        ))}
-        <p><small>{testimonials.disclaimer}</small></p>
+        <div className="testimonials__grid">
+          {testimonials.items.map((item) => (
+            <figure className="testimonials__quote card" key={item.name}>
+              <span className="testimonials__mark" aria-hidden="true">“</span>
+              <blockquote>{item.quote}</blockquote>
+              <figcaption className="testimonials__author">
+                <strong>{item.name}</strong>
+                <span>{item.role}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        <p className="testimonials__disclaimer" id="testimonials-disclaimer"><small>{testimonials.disclaimer}</small></p>
       </div>
     </section>
   );

@@ -1,3 +1,18 @@
-/* Owner: Codex (task #3) */
-.hero { background: var(--color-surface); }
-.hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+/* Task #3: home hero and problem framing. */
+.hero { background: radial-gradient(ellipse at top right, var(--color-primary-soft), var(--color-surface) 65%); border-bottom: 1px solid var(--color-border); }
+.hero__intro { max-width: 860px; padding-bottom: var(--space-6); }
+.hero__brand { margin: 0 0 var(--space-4); }
+.hero__title { max-width: 15ch; font-size: clamp(2.75rem, 6.5vw, 5.5rem); letter-spacing: -0.055em; line-height: 1.04; color: var(--color-primary); margin-bottom: var(--space-4); }
+.hero__description { max-width: 65ch; font-size: var(--text-lg); color: var(--color-text-muted); margin: 0 0 var(--space-5); }
+.hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.hero__actions .btn { padding-block: var(--space-3); }
+.hero__problem { border-top: 1px solid var(--color-border); padding-top: var(--space-5); display: grid; gap: var(--space-4); }
+.hero__context h2 { font-size: var(--text-xl); }
+.hero__context p { color: var(--color-text-muted); max-width: 54ch; margin: 0 0 var(--space-3); }
+.hero__risks-label { margin: 0 0 var(--space-3); font-size: var(--text-sm); font-weight: 600; color: var(--color-text-muted); }
+.hero__risk-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
+.hero__risk { position: relative; padding-left: var(--space-5); box-shadow: none; }
+.hero__risk-marker { position: absolute; top: var(--space-4); left: var(--space-3); width: var(--space-1); height: var(--space-4); border-radius: var(--radius-sm); background: var(--color-accent); }
+.hero__risk h3 { font-size: var(--text-md); margin-bottom: var(--space-2); }
+.hero__risk p { margin: 0; color: var(--color-text-muted); }
+@media (min-width: 800px) { .hero__problem { grid-template-columns: 1fr 1fr; gap: var(--space-6); } .hero__intro { padding-top: var(--space-4); } }

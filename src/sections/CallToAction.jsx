@@ -1,19 +1,21 @@
 import { cta } from '../lib/company.js';
 import './CallToAction.css';
 
-// PLACEHOLDER. Owner: Codex (task #3). Used at the bottom of Home and About.
-// cta.email is null until the business team provides it: show the TODO instead of a broken link.
 export default function CallToAction() {
   return (
-    <section className="cta section">
+    <section className="cta section" aria-labelledby="cta-title">
       <div className="container">
-        <h2>{cta.heading}</h2>
-        <p>{cta.text}</p>
-        {cta.email ? (
-          <a className="btn" href={`mailto:${cta.email}`}>{cta.button}</a>
-        ) : (
-          <span className="todo">[TODO: team email for “{cta.button}”]</span>
-        )}
+        <div className="cta__panel card">
+          <div className="cta__copy">
+            <h2 className="cta__title" id="cta-title">{cta.heading}</h2>
+            <p className="cta__text">{cta.text}</p>
+          </div>
+          {cta.email ? (
+            <a className="cta__button btn" href={`mailto:${cta.email}`}>{cta.button}<span aria-hidden="true"> ↗</span></a>
+          ) : (
+            <span className="todo">[TODO: team email for “{cta.button}”]</span>
+          )}
+        </div>
       </div>
     </section>
   );
