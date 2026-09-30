@@ -36,9 +36,10 @@ session in the terminal can pick up where it left off. Written 2026-09-30.
 - `run.sh`: npm install → build → vite preview on :4173 → curls /api/health and / (matches judges' example).
 
 ## Brand
-- Logo files in `public/brand/`: `nexo-logo.png` (light backgrounds), `nexo-logo-light.png`
-  (dark mode), `nexo-icon-512.png` (N mark). Favicons in `public/`: `favicon.ico`,
-  `favicon-32.png`, `apple-touch-icon.png`.
+- Logo files in `public/brand/`: `nexo-logo.svg` (light backgrounds), `nexo-logo-light.svg`
+  (dark mode: purple swapped to near-white), `nexo-icon.svg` + `nexo-icon-512.png` (N mark).
+  Favicons in `public/`: `favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`.
+  The SVG uses #3b1b5c / #00bd83, visually identical to the brand #351B5C / #00BB7D.
 - Colors from the logo: purple **#351B5C** (primary), green **#00BB7D** (accent only; never white
   text on green, it fails contrast). Lighten the purple for dark mode.
 - Team photos go in `public/team/<first-last>.jpg` (e.g. `racielly-mella.jpg`), 600px, <300 KB.
@@ -63,8 +64,10 @@ session in the terminal can pick up where it left off. Written 2026-09-30.
 ## Where we are
 - [x] Tools installed (gh, claude, codex); repo created and pushed to GitHub.
 - [x] `codex-hero` worktree exists.
-- [ ] Logo files copied into `public/` (in progress)
-- [ ] New CONTENT.md + team photos committed to main
+- [x] Logo + favicon files in `public/` (SVG logos, 2026-09-29)
+- [x] Team photos in `public/team/` (all five founders; Racielly's is 200px, others 400px)
+- [ ] Assets pushed to GitHub (committed locally on main; Yangel runs `git push origin main`)
+- [ ] New CONTENT.md (with SITE MAP section) committed to main: BLOCKS the company setup task
 - [ ] Vercel project connected (confirm; put the live URL in README.md and run.sh LIVE_URL)
 - [ ] NEXT FOR CLAUDE: the "company setup" task below
 - [ ] Then: `./scripts/setup-agents.sh mission about`; merge origin/main into codex-hero; start 3 Codex agents
